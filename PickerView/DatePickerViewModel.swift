@@ -2,30 +2,55 @@
 //  DatePickerViewModel.swift
 //  PickerView
 //
-//  Created by a.ostroverkhov on 08/10/2018.
+//  Created by a.ostroverkhov on 10/10/2018.
 //  Copyright © 2018 a.ostroverkhov. All rights reserved.
 //
 
 import Foundation
 
-struct PickerData {
-    let days: [Date]
-    let hours: [Date]
-    let minuts: [Date]
-}
 
-struct PickerData2 {
-    let days: [Day]
-}
-
-struct Day {
-    let output: String
-    let days: [DateInterval]
-}
-
-struct Hour {
-    let output: String
-    let hour: [DateInterval]
+struct DateConstant {
+    var day: DateComponents {
+        return DateComponents(day: 1)
+    }
+    
+    var hour: DateComponents {
+        return DateComponents(hour: 1)
+    }
+    
+    var minute: DateComponents {
+        return DateComponents(minute: 1)
+    }
+    
+    var timeZone:TimeZone {
+        return TimeZone.current
+    }
+    
+    var calendar: Calendar {
+        return Calendar.current
+    }
+    
+    func startOfDay(_ date: Date) -> Date {
+        return calendar.startOfDay(for: date)
+    }
+    
+    func endOfDay(_ date: Date) -> Date {
+        
+        guard
+            let nextDay = calendar.date(
+                byAdding: day,
+                to: calendar.startOfDay(for: date)
+            ),
+            
+            let endDay = calendar.date(
+                byAdding: DateComponents(second: -1),
+                to: calendar.startOfDay(for: nextDay)
+            )
+        else {
+                fatalError()
+        }
+        return endDay
+    }
 }
 
 class DatePickerViewModel {
@@ -33,12 +58,9 @@ class DatePickerViewModel {
     var endTime: Date = Date()
     var currentTime: Date = Date()
     var stepTime: TimeInterval = 300.0
-    private let timeZone = TimeZone.current
-    private let calendar = Calendar.current
-    private let day: TimeInterval = 86400
-    private let hour: TimeInterval = 3600
-    private let minut: TimeInterval = 300
-    private let coutnDays: Int = 3
+    var countDays: Int = 3
+    
+    private var dateConstant = DateConstant()
     
     private var startComponents: DateComponents = DateComponents()
     private var endComponents: DateComponents = DateComponents()
@@ -48,6 +70,7 @@ class DatePickerViewModel {
         self.startTime = start
         self.endTime = end
         self.stepTime = step
+        setComponets()
     }
     
     init(start: Date, end: Date, current: Date, step: TimeInterval) {
@@ -55,6 +78,7 @@ class DatePickerViewModel {
         self.endTime = end
         self.currentTime = current
         self.stepTime = step
+        setComponets()
     }
     
     init(start: String, end: String) {
@@ -65,187 +89,88 @@ class DatePickerViewModel {
         guard let startTime = dateFormatter.date(from: start) else {
             fatalError("invalid start date")
         }
-        print(timeZone)
         
         guard let endTime = dateFormatter.date(from: end) else {
-            fatalError("invalid start date")
+            fatalError("invalid end date")
         }
         
         self.startTime = startTime
         self.endTime = endTime
-    }
-    
-    private func setComponets() {
-        startComponents = calendar.dateComponents(in: timeZone, from: startTime)
-        endComponents = calendar.dateComponents(in: timeZone, from: endTime)
-        currentComponents = calendar.dateComponents(in: timeZone, from: currentTime)
-    }
-    
-    private func getTodayTimeWork() -> (strart: DateComponents, end: DateComponents) {
         setComponets()
-        let hourStart = startComponents.hour
-        let minStart = startComponents.minute
-        let hourEnd = endComponents.hour
-        let minEnd = endComponents.minute
-        
-        let todayTimeStart = DateComponents(
-            calendar: Calendar.current,
-            timeZone: timeZone,
-            year: currentComponents.year,
-            month: currentComponents.month,
-            day: currentComponents.day,
-            hour: hourStart,
-            minute: minStart
-        )
-//        let x = todayTimeStart.date?.description(with: Locale.current)
-//        print(x)
-        let todayTimeEnd = DateComponents(
-            calendar: Calendar.current,
-            timeZone: timeZone,
-            year: currentComponents.year,
-            month: currentComponents.month,
-            day: currentComponents.day,
-            hour: hourEnd,
-            minute: minEnd
-        )
-        
+    }
 
-        return (todayTimeStart, todayTimeEnd)
+    private func setComponets() {
+        startComponents = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: startTime)
+        endComponents = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: endTime)
+        currentComponents = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: currentTime)
     }
     
-    private func getNextDay(_ day: Date) -> Date {
-        return day + self.day
-    }
-    
-    private func nextDayIntervalWork(_ intervals: [DateInterval]) -> [DateInterval] {
-        var result = [DateInterval]()
-        for interval in intervals {
-            result.append(DateInterval(start: getNextDay(interval.start), end: getNextDay(interval.end)))
+    //Время работы
+    private func getWorkTime(for date: Date) -> [DateInterval] {
+        var todayTimeStart = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: date)
+        todayTimeStart.calendar = dateConstant.calendar
+        todayTimeStart.timeZone = dateConstant.timeZone
+        todayTimeStart.hour = startComponents.hour
+        todayTimeStart.minute = startComponents.minute
+        todayTimeStart.second = 0
+
+        var todayTimeEnd = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: date)
+        todayTimeEnd.calendar = dateConstant.calendar
+        todayTimeEnd.timeZone = dateConstant.timeZone
+        todayTimeEnd.hour = endComponents.hour
+        todayTimeEnd.minute = endComponents.minute
+        todayTimeEnd.second = 0
+        
+        guard let start = todayTimeStart.date else {
+            fatalError()
         }
-        return result
+        
+        guard let end = todayTimeEnd.date else {
+            fatalError()
+        }
+        
+        var intervals = [DateInterval]()
+        if start < end {
+            intervals.append(DateInterval(start: start, end: end))
+        } else {
+            intervals.append(DateInterval(start: dateConstant.startOfDay(date), end: end))
+            intervals.append(DateInterval(start: start, end: dateConstant.endOfDay(date)))
+        }
+        
+        return intervals
     }
     
-    private func nextAllDayInterval(_ interval: DateInterval) -> DateInterval {
-        let endDay = DateComponents(
-            calendar: Calendar.current,
-            timeZone: timeZone,
-            year: currentComponents.year,
-            month: currentComponents.month,
-            day: currentComponents.day! + 1,
-            hour: 23,
-            minute: 59,
-            second: 59
-        )
-        return DateInterval(start: interval.start, end: endDay.date!)
-    }
-    
-    private func add(_ day: Date, minute: Int) -> Date {
-        let minute = minute * 60
-        return day + TimeInterval(minute)
-    }
-    
-    private func addFiviMinute(_ day: Date) -> Date {
-        let minute = 5 * 60
-        return day + TimeInterval(minute)
-    }
-    
-    private func firstWorkDay() -> [DateInterval] {
-        let time = getTodayTimeWork()
-        var intervalsWork = getIntervals(start: time.strart, end: time.end)
-        var intervalToday = intervalToEndDay()
+    private func getWorkTime(for date: Date, with time: Date) -> [DateInterval] {
         var resultIntervals = [DateInterval]()
+        
+        var intervalsWork = getWorkTime(for: date)
+        var intervalToEnd = getTimeToEnd(of: date)
+        
         for interval in intervalsWork {
-            if let intersection = intervalToday.intersection(with: interval) {
+            if let intersection = intervalToEnd.intersection(with: interval) {
                 resultIntervals.append(intersection)
             }
         }
-        if resultIntervals.isEmpty {
-            intervalsWork = nextDayIntervalWork(intervalsWork)
-            intervalToday = nextAllDayInterval(intervalToday)
-            for interval in intervalsWork {
-                if let intersection = intervalToday.intersection(with: interval) {
-                    resultIntervals.append(intersection)
-                }
-            }
-        }
         
+        if (resultIntervals.isEmpty) {
+        }
         return resultIntervals
     }
     
-    private func intervalToEndDay() -> DateInterval {
-        let endDay = DateComponents(
-            calendar: Calendar.current,
-            timeZone: timeZone,
-            year: currentComponents.year,
-            month: currentComponents.month,
-            day: currentComponents.day,
-            hour: 23,
-            minute: 59,
-            second: 59
-        )
-        return DateInterval(start: currentTime, end: endDay.date!)
+    private func getTimeToEnd(of day: Date) -> DateInterval {
+        return DateInterval(start: day, end: dateConstant.endOfDay(day))
     }
-    
-    private func firstDayWorkTime() {
-        
-    }
-    
-    private func getIntervals(start: DateComponents, end: DateComponents) -> [DateInterval] {
-        var dayIntervalsWork = [DateInterval]()
-        
-        guard let start = start.date else {
-            fatalError()
-        }
-        guard let end = end.date else {
-            fatalError()
-        }
-        
-        let startCurrentDay = Calendar.current.startOfDay(for: Date())
 
-        let endDay = DateComponents(
-            calendar: Calendar.current,
-            timeZone: timeZone,
-            year: currentComponents.year,
-            month: currentComponents.month,
-            day: currentComponents.day,
-            hour: 23,
-            minute: 59,
-            second: 59
-        )
-        
-        guard let endCurrentDay = endDay.date else {
-            fatalError()
-        }
-        
-        if(start < end) {
-            dayIntervalsWork.append(DateInterval(start: start, end: end))
-        } else {
-
-            dayIntervalsWork.append(DateInterval(start: startCurrentDay, end: end))
-            dayIntervalsWork.append(DateInterval(start: start, end: endCurrentDay))
-        }
-        return dayIntervalsWork
-    }
-    
-    private func splitIntervals(_ intervals: [DateInterval]) {
-        
-        
-//        for i in 0..<intervals.count {//дни
-//            var tempHour = intervals[i].start
-//            while tempHour < intervals[i].end {
-//                print(tempHour.description(with: Locale.current));
-//                var tempMin = calendar.dateComponents(in: timeZone, from: tempHour).minute
-//                while tempMin! < Int(hour)/60 {
-//                    //print(tempMin)
-//                    tempMin! += Int(minut)/60
-//                }
-//                tempHour = tempHour + hour;
-//            }
-//        }
-    }
-    
     func test() {
-        //splitIntervals(getIntervals(start: getTodayTimeWorkDays().strart, end: getTodayTimeWorkDays().end));
-        print(firstWorkDay())
+        print(getWorkTime(for: currentTime))
+        var date = currentTime
+        for _ in 0..<countDays {
+            guard let x = dateConstant.calendar.date(byAdding: dateConstant.day, to: date) else {
+                fatalError()
+            }
+            date = x
+            print(getWorkTime(for: date))
+        }
     }
+    
 }
