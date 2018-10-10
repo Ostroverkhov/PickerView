@@ -9,12 +9,86 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    
+    @IBOutlet weak var pickerView: UIPickerView!
+    var start: DateComponents?
+    var end: DateComponents?
+    var curentTime: Date?
+    let date = DatePickerViewModel(start: "03:10", end: "10:30")
+    var data = PickerData.init(days: [], hours: [], minuts: [])
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        pickerView.dataSource = self
+        pickerView.delegate = self
+        start = DateComponents(day: 1, hour: 8, minute: 30)
+        end  = DateComponents(day: 1, hour: 20, minute: 0)
+        //self.data = self.date.getArrays()
+        self.date.test()
+        //print(start)
+        //print(end)
+        //test2()
+        //print(Date())
     }
+    
+    
+    private func test() {
+        let timeZone = TimeZone.current
+        let date = Date()
+        let calendar = Calendar.current
+        let dateComponents = calendar.dateComponents(in: timeZone, from: date)
+        print(dateComponents)
 
+    }
+    
+    private func test2() {
+//        let date = DatePickerViewModel(start: "2018-10-08T08:00", end: "2018-10-08T20:00")
+        //print(date.getArrays())
+        
+//        print(date.startTime)
+//        print(date.startTime.timeIntervalSince(date.endTime))
+//        print(date.startTime < date.endTime)
+    }
+}
+extension ViewController:UIPickerViewDelegate {
+    
+}
 
+extension ViewController: UIPickerViewDataSource {
+    func numberOfComponents(in pickerView: UIPickerView) -> Int {
+        return 3
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        switch component {
+        case 0:
+            return data.days.count
+        case 1:
+            return data.hours.count
+        case 2:
+            return data.minuts.count
+        default:
+            return 0
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        let dayF = DateFormatter()
+        let hourF = DateFormatter()
+        let minF = DateFormatter()
+        dayF.dateFormat = "dd.MM"
+        hourF.dateFormat = "HH"
+        minF.dateFormat = "mm"
+        
+        switch component {
+        case 0:
+            return dayF.string(from: data.days[row])
+        case 1:
+            return hourF.string(from: data.hours[row])
+        case 2:
+            return minF.string(from: data.minuts[row])
+        default:
+            return ""
+        }
+    }
 }
 
