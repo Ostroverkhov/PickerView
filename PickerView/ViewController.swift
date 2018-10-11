@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     var start: DateComponents?
     var end: DateComponents?
     var curentTime: Date?
-    let date = DatePickerViewModel(start: "08:10", end: "02:30")
+    let date = DatePickerViewModel(start: "08:00", end: "07:30")
     //var data = PickerData.init(days: [], hours: [], minuts: [])
     override func viewDidLoad() {
         super.viewDidLoad()

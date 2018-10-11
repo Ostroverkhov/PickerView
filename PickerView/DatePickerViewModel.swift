@@ -53,6 +53,11 @@ struct DateConstant {
     }
 }
 
+struct Day {
+    let data: Date
+    let intervals: [DateInterval]
+}
+
 class DatePickerViewModel {
     var startTime: Date = Date()
     var endTime: Date = Date()
@@ -105,7 +110,7 @@ class DatePickerViewModel {
         currentComponents = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: currentTime)
     }
     
-    //Время работы
+    //Время работы в конкретный день
     private func getWorkTime(for date: Date) -> [DateInterval] {
         var todayTimeStart = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: date)
         todayTimeStart.calendar = dateConstant.calendar
@@ -140,37 +145,116 @@ class DatePickerViewModel {
         return intervals
     }
     
+    //Ближайшее время работы в конкретный день, учитывая текущее время (ближайший рабочий интервал)
     private func getWorkTime(for date: Date, with time: Date) -> [DateInterval] {
         var resultIntervals = [DateInterval]()
         
-        var intervalsWork = getWorkTime(for: date)
-        var intervalToEnd = getTimeToEnd(of: date)
+        let intervalsWork = getWorkTime(for: date)
+        let intervalToEnd = getTimeToEnd(of: date)
         
         for interval in intervalsWork {
             if let intersection = intervalToEnd.intersection(with: interval) {
                 resultIntervals.append(intersection)
             }
         }
-        
-        if (resultIntervals.isEmpty) {
+        if (resultIntervals.isEmpty){
+            let nextday = startOfNext(day: date)
+            resultIntervals = getWorkTime(for: nextday)
         }
+
         return resultIntervals
     }
     
+    //Интервал до конца дня
     private func getTimeToEnd(of day: Date) -> DateInterval {
         return DateInterval(start: day, end: dateConstant.endOfDay(day))
     }
-
-    func test() {
-        print(getWorkTime(for: currentTime))
-        var date = currentTime
-        for _ in 0..<countDays {
-            guard let x = dateConstant.calendar.date(byAdding: dateConstant.day, to: date) else {
-                fatalError()
-            }
-            date = x
-            print(getWorkTime(for: date))
+    
+    //начало следущего дня
+    private func startOfNext(day: Date) -> Date {
+        guard let result = dateConstant.calendar.date(byAdding: DateComponents(second: 1), to: dateConstant.endOfDay(day)) else {
+            fatalError()
         }
+        return result
+    }
+    
+    //Начало следущего часа
+    private func startOfNext(hour: Date) -> Date {
+        
+        guard let result = dateConstant.calendar.date(byAdding: DateComponents(hour: 1), to: hour) else {
+            fatalError()
+        }
+        
+        var resultComponents = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: result)
+        resultComponents.minute = 0;
+        resultComponents.second = 0;
+        
+        guard let nextHour = resultComponents.date else {
+            fatalError()
+        }
+        
+        return nextHour
+    }
+    
+    private func startOfNext(step: Date) -> Date {
+        var dateComponents = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: step)
+        dateComponents.second = 0;
+        var minute = dateComponents.minute!
+        minute = minute % (Int(stepTime) / 60)
+        minute = (Int(stepTime) / 60) - minute
+        guard let step = dateConstant.calendar.date(byAdding: Calendar.Component.minute, value: minute, to: step) else {
+            fatalError()
+        }
+        return step
+    }
+ 
+    //функция, которая создает дни
+    private func getArrayDays() -> [Day] {
+        var result = [Day]()
+        var day = currentTime
+        let firstInterval = getWorkTime(for: day, with: day)
+        guard let firstDay = firstInterval.first?.start else {
+            fatalError()
+        }
+        result.append(Day(data: firstDay, intervals: firstInterval))
+        print(firstInterval)
+        for _ in 0..<(countDays - 1) {
+            day = startOfNext(day: day)
+            print(getWorkTime(for: day))
+            result.append(Day(data: day, intervals: getWorkTime(for: day)))
+        }
+        return result
+    }
+    
+    //функция, которая по интервалам строит разбиение
+    private func getArrayHoursInterval(_ day: Day) -> [Date] {
+        var arr = [Date]()
+        for interval in day.intervals {
+            var date = interval.start
+            while(date <= interval.end) {
+                arr.append(date)
+                date = startOfNext(hour: date)
+            }
+            arr.append(interval.end)
+        }
+        return arr
+    }
+    
+    private func getArrayMinute(_ hourStart: Date, _ hourEnd: Date) -> [Date] {
+        var arr = [Date]()
+        var step = hourStart
+        while step < hourEnd {
+            arr.append(step)
+            step = startOfNext(step: step)
+        }
+        return arr
+    }
+    
+    
+    func test() {
+        var x = getArrayHoursInterval(getArrayDays()[1])
+        print(x)
+        //print(getArrayMinute(x[1], x[2]))
     }
     
 }

@@ -18,10 +18,7 @@ struct PickerData2 {
     let days: [Day]
 }
 
-struct Day {
-    let output: String
-    let days: [DateInterval]
-}
+
 
 struct Hour {
     let output: String
