@@ -18,34 +18,11 @@ class ViewController: UIViewController {
     var days = [Day]()
     var hours = [Hour]()
     var minutes = [Minute]()
-    //var data = PickerData.init(days: [], hours: [], minuts: [])
     override func viewDidLoad() {
         super.viewDidLoad()
         pickerView.dataSource = self
         pickerView.delegate = self
-        start = DateComponents(day: 1, hour: 8, minute: 30)
-        end  = DateComponents(day: 1, hour: 23, minute: 0)
-        
         days = date.createData()
-    }
-    
-    
-    private func test() {
-        let timeZone = TimeZone.current
-        let date = Date()
-        let calendar = Calendar.current
-        let dateComponents = calendar.dateComponents(in: timeZone, from: date)
-        print(dateComponents)
-
-    }
-    
-    private func test2() {
-//        let date = DatePickerViewModel(start: "2018-10-08T08:00", end: "2018-10-08T20:00")
-        //print(date.getArrays())
-        
-//        print(date.startTime)
-//        print(date.startTime.timeIntervalSince(date.endTime))
-//        print(date.startTime < date.endTime)
     }
 }
 extension ViewController:UIPickerViewDelegate {
