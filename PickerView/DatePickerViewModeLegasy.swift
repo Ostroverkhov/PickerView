@@ -20,10 +20,10 @@ struct PickerData2 {
 
 
 
-struct Hour {
-    let output: String
-    let hour: [DateInterval]
-}
+//struct Hour {
+//    let output: String
+//    let hour: [DateInterval]
+//}
 
 class DatePickerViewModelLegasy {
     var startTime: Date = Date()

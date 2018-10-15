@@ -15,6 +15,9 @@ class ViewController: UIViewController {
     var end: DateComponents?
     var curentTime: Date?
     let date = DatePickerViewModel(start: "08:00", end: "07:30")
+    var days = [Day]()
+    var hours = [Hour]()
+    var minutes = [Minute]()
     //var data = PickerData.init(days: [], hours: [], minuts: [])
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -22,14 +25,8 @@ class ViewController: UIViewController {
         pickerView.delegate = self
         start = DateComponents(day: 1, hour: 8, minute: 30)
         end  = DateComponents(day: 1, hour: 23, minute: 0)
-        print(Calendar.current.monthSymbols)
-        print(Locale.current)
-        //self.data = self.date.getArrays()
-        self.date.test()
-        //print(start?.date)
-        //print(Calendar.current.date(byAdding: DateComponents(hour: 2, minute: 0), to: end!.date!))
-        //test2()
-        //print(Date())
+        
+        days = date.createData()
     }
     
     
@@ -53,6 +50,19 @@ class ViewController: UIViewController {
 }
 extension ViewController:UIPickerViewDelegate {
     
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        switch component {
+        case 0:
+            hours = days[row].hours
+            pickerView.reloadComponent(component + 1)
+        case 1:
+            minutes = hours[row].minutes
+            pickerView.reloadComponent(component + 1)
+        default:
+            break
+        }
+        
+    }
 }
 
 extension ViewController: UIPickerViewDataSource {
@@ -61,17 +71,16 @@ extension ViewController: UIPickerViewDataSource {
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-//        switch component {
-//        case 0:
-//            return data.days.count
-//        case 1:
-//            return data.hours.count
-//        case 2:
-//            return data.minuts.count
-//        default:
-//            return 0
-//        }
-        return 0
+        switch component {
+        case 0:
+            return days.count
+        case 1:
+            return hours.count
+        case 2:
+            return minutes.count
+        default:
+            return 0
+        }
     }
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
@@ -82,17 +91,16 @@ extension ViewController: UIPickerViewDataSource {
         hourF.dateFormat = "HH"
         minF.dateFormat = "mm"
         
-//        switch component {
-//        case 0:
-//            return dayF.string(from: data.days[row])
-//        case 1:
-//            return hourF.string(from: data.hours[row])
-//        case 2:
-//            return minF.string(from: data.minuts[row])
-//        default:
-//            return ""
-//        }
-        return ""
+        switch component {
+        case 0:
+            return dayF.string(from: days[row].date)
+        case 1:
+            return hourF.string(from: hours[row].date)
+        case 2:
+            return minF.string(from: minutes[row].date)
+        default:
+            return ""
+        }
     }
 }
 

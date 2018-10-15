@@ -54,8 +54,30 @@ struct DateConstant {
 }
 
 struct Day {
-    let data: Date
+    let date: Date
     let intervals: [DateInterval]
+    var hours: [Hour]
+    
+    init(date: Date, intervals: [DateInterval]) {
+        self.date = date
+        self.intervals = intervals
+        self.hours = []
+    }
+}
+
+struct Hour {
+    let date: Date
+    let intervals: DateInterval
+    var minutes: [Minute] = []
+    
+    init(date: Date, intervals: DateInterval) {
+        self.date = date
+        self.intervals = intervals
+    }
+}
+
+struct Minute {
+    let date: Date
 }
 
 class DatePickerViewModel {
@@ -198,14 +220,26 @@ class DatePickerViewModel {
     
     private func startOfNext(step: Date) -> Date {
         var dateComponents = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: step)
-        dateComponents.second = 0;
+//        dateComponents.second = 0;
         var minute = dateComponents.minute!
         minute = minute % (Int(stepTime) / 60)
         minute = (Int(stepTime) / 60) - minute
-        guard let step = dateConstant.calendar.date(byAdding: Calendar.Component.minute, value: minute, to: step) else {
+        guard let step = dateConstant.calendar.date(byAdding: DateComponents(minute: minute, second: -dateComponents.second!), to: step) else {
             fatalError()
         }
         return step
+    }
+    
+    private func startMinute(_ date: Date) -> Date {
+        var dateComponents = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: date)
+        //        dateComponents.second = 0;
+        let minute = dateComponents.minute!
+        if (minute % (Int(stepTime) / 60)) == 0 {
+            return date
+        }
+        else {
+            return startOfNext(step: date)
+        }
     }
  
     //функция, которая создает дни
@@ -216,45 +250,126 @@ class DatePickerViewModel {
         guard let firstDay = firstInterval.first?.start else {
             fatalError()
         }
-        result.append(Day(data: firstDay, intervals: firstInterval))
+        result.append(Day(date: firstDay, intervals: firstInterval))
         print(firstInterval)
         for _ in 0..<(countDays - 1) {
             day = startOfNext(day: day)
             print(getWorkTime(for: day))
-            result.append(Day(data: day, intervals: getWorkTime(for: day)))
+            result.append(Day(date: day, intervals: getWorkTime(for: day)))
         }
         return result
     }
     
-    //функция, которая по интервалам строит разбиение
-    private func getArrayHoursInterval(_ day: Day) -> [Date] {
-        var arr = [Date]()
+    //функция, которая по интервалам дней строит разбиение по часам
+//    private func getArrayHoursInterval(_ day: Day) -> [Date] {
+//        var arr = [Date]()
+//        for interval in day.intervals {
+//            var date = interval.start
+//            while(date <= interval.end) {
+//                arr.append(date)
+//                date = startOfNext(hour: date)
+//            }
+//            arr.append(interval.end)
+//        }
+//        return arr
+//    }
+    
+//    private func getArrayHoursInterval(_ day: Day) -> [DateInterval] {
+//        var arr = [DateInterval]()
+//        for interval in day.intervals {
+//            var date = interval.start
+//            var hourStart = interval.start
+//            var hourEnd = startOfNext(hour: interval.start)
+//            while(hourStart < interval.end) {
+//                arr.append(DateInterval(start: hourStart, end: hourEnd))
+//                //print(DateInterval(start: hourStart, end: hourEnd))
+//                hourStart = startOfNext(hour: hourStart)
+//                if( startOfNext(hour: hourEnd) <= interval.end) {
+//                    hourEnd = startOfNext(hour: hourEnd)
+//                } else{
+//                    hourEnd = interval.end
+//                    arr.append(DateInterval(start: hourStart, end: hourEnd))
+//                    //print(DateInterval(start: hourStart, end: hourEnd))
+//
+//                    break
+//
+//                }
+//                //date = startOfNext(hour: date)
+//            }
+//            //arr.append(interval.end)
+//        }
+//        return arr
+//    }
+    
+    private func getArrayHoursInterval(_ day: Day) -> [Hour] {
+        var arr = [Hour]()
         for interval in day.intervals {
             var date = interval.start
-            while(date <= interval.end) {
-                arr.append(date)
-                date = startOfNext(hour: date)
+            var hourStart = interval.start
+            var hourEnd = startOfNext(hour: interval.start)
+            while(hourStart < interval.end) {
+                var hour: Hour = Hour(date: hourStart, intervals: DateInterval(start: hourStart, end: hourEnd))
+                arr.append(hour)
+                hourStart = startOfNext(hour: hourStart)
+                if( startOfNext(hour: hourEnd) <= interval.end) {
+                    hourEnd = startOfNext(hour: hourEnd)
+                } else{
+                    hourEnd = interval.end
+                    hour = Hour(date: hourStart, intervals: DateInterval(start: hourStart, end: hourEnd))
+                    arr.append(hour)
+                    break
+                }
             }
-            arr.append(interval.end)
         }
         return arr
     }
     
-    private func getArrayMinute(_ hourStart: Date, _ hourEnd: Date) -> [Date] {
-        var arr = [Date]()
-        var step = hourStart
+//    private func getArrayMinute(_ hourStart: Date, _ hourEnd: Date) -> [Date] {
+//        var arr = [Date]()
+//        var step = startMinute(hourStart)
+//        arr.append(step)
+//        step = startOfNext(step: step)
+//        while step < hourEnd {
+//            arr.append(step)
+//            step = startOfNext(step: step)
+//        }
+//        return arr
+//    }
+    
+    private func getArrayMinute(_ hourStart: Date, _ hourEnd: Date) -> [Minute] {
+        var arr = [Minute]()
+        var step = startMinute(hourStart)
+        var minute = Minute(date: step)
+        arr.append(minute)
+        step = startOfNext(step: step)
         while step < hourEnd {
-            arr.append(step)
+            minute = Minute(date: step)
+            arr.append(minute)
             step = startOfNext(step: step)
         }
         return arr
     }
+
     
+    func createData() -> [Day] {
+        var days = getArrayDays()
+        
+        for i in 0..<days.count {
+            days[i].hours = getArrayHoursInterval(days[i])
+            //print(days[i])
+            for j in 0..<days[i].hours.count {
+                days[i].hours[j].minutes = getArrayMinute(days[i].hours[j].intervals.start, days[i].hours[j].intervals.end)
+                //print(days[i].hours[j].minutes)
+            }
+        }
+        return days
+    }
     
     func test() {
-        var x = getArrayHoursInterval(getArrayDays()[1])
-        print(x)
-        //print(getArrayMinute(x[1], x[2]))
+        //var x = getArrayHoursInterval(getArrayDays()[0])
+        //print(x)
+        //print(getArrayMinute(x[1].start, x[1].end))
+        //createData()
     }
     
 }
