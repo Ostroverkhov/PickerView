@@ -37,18 +37,6 @@ struct Minute {
 
 
 struct DateConstant {
-    var day: DateComponents {
-        return DateComponents(day: 1)
-    }
-    
-    var hour: DateComponents {
-        return DateComponents(hour: 1)
-    }
-    
-    var minute: DateComponents {
-        return DateComponents(minute: 1)
-    }
-    
     var timeZone:TimeZone {
         return TimeZone.current
     }
@@ -65,7 +53,7 @@ struct DateConstant {
         
         guard
             let nextDay = calendar.date(
-                byAdding: day,
+                byAdding: DateComponents(day: 1),
                 to: calendar.startOfDay(for: date)
             ),
             
@@ -85,7 +73,7 @@ class DatePickerViewModel {
     var startTime: Date = Date()
     var endTime: Date = Date()
     var currentTime: Date = Date()
-    var stepTime: DateComponents = DateComponents(hour: 0, minute: 5)
+    var stepTime: DateComponents = DateComponents(minute: 5)
     var countDays: Int = 3
     var deliveryTime: DateComponents = DateComponents(hour: 0, minute: 30)
     
@@ -103,7 +91,7 @@ class DatePickerViewModel {
             fatalError()
         }
         
-        self.startTime = firstStep(start)//startMinute(start) // startOfNext(step: start)
+        self.startTime = firstStep(start)
         self.endTime = end
         self.currentTime = firstStep(current)
         self.stepTime = step
@@ -214,18 +202,6 @@ class DatePickerViewModel {
         return nextStep
     }
     
-    private func startMinute(_ date: Date) -> Date {
-        var dateComponents = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: date)
-        let minute = dateComponents.minute!
-        if (minute % Int(stepTime.minute!)) == 0 {
-            return date
-        }
-        else {
-            return next(step: date)
-        }
-    }
- 
-    
     //Время работы в конкретный день
     private func getWorkTime(for date: Date) -> [DateInterval] {
         var todayTimeStart = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: date)
@@ -281,14 +257,12 @@ class DatePickerViewModel {
             let nextday = startOfNext(day: date)
             resultIntervals = getWorkTime(for: nextday)
         }
-        
         return resultIntervals
     }
     
     //функция, которая создает дни
     private func getArrayDays() -> [Day] {
         var result = [Day]()
-        
         
         let firstInterval = getWorkTime(for: currentTime, with: currentTime)
         guard let firstDay = firstInterval.first?.start else {
@@ -314,7 +288,7 @@ class DatePickerViewModel {
                 var hour = Hour(date: hourStart, intervals: DateInterval(start: hourStart, end: hourEnd))
                 arr.append(hour)
                 hourStart = startOfNext(hour: hourStart)
-                if( startOfNext(hour: hourEnd) <= interval.end) {
+                if(startOfNext(hour: hourEnd) <= interval.end) {
                     hourEnd = startOfNext(hour: hourEnd)
                 } else{
                     hourEnd = interval.end
@@ -330,7 +304,7 @@ class DatePickerViewModel {
 
     private func getArrayMinute(_ hour: DateInterval) -> [Minute] {
         var arr = [Minute]()
-        var step = startMinute(hour.start)
+        var step = firstStep(hour.start)
         var minute = Minute(date: step)
         arr.append(minute)
         step = next(step: step)
