@@ -98,15 +98,14 @@ class DatePickerViewModel {
     init(start: Date, end: Date, step: DateComponents) {
         guard
             let start = dateConstant.calendar.date(byAdding: deliveryTime, to: start),
-            //let end = dateConstant.calendar.date(byAdding: deliveryTime, to: end),
             let current = dateConstant.calendar.date(byAdding: deliveryTime, to: currentTime)
         else {
             fatalError()
         }
         
-        self.startTime = startMinute(start) // startOfNext(step: start)
-        self.endTime = startMinute(end)
-        self.currentTime = startMinute(current)
+        self.startTime = firstStep(start)//startMinute(start) // startOfNext(step: start)
+        self.endTime = end
+        self.currentTime = firstStep(current)
         self.stepTime = step
         setComponets()
     }
@@ -114,9 +113,8 @@ class DatePickerViewModel {
     init(start: Date, end: Date, current: Date, step: DateComponents) {
         guard
             let start = dateConstant.calendar.date(byAdding: deliveryTime, to: start),
-            //let end = dateConstant.calendar.date(byAdding: deliveryTime, to: end),
             let current = dateConstant.calendar.date(byAdding: deliveryTime, to: currentTime)
-            else {
+        else {
                 fatalError()
         }
         
@@ -141,9 +139,8 @@ class DatePickerViewModel {
         
         guard
             let start = dateConstant.calendar.date(byAdding: deliveryTime, to: startTime),
-            //let end = dateConstant.calendar.date(byAdding: deliveryTime, to: endTime),
             let current = dateConstant.calendar.date(byAdding: deliveryTime, to: currentTime)
-            else {
+        else {
                 fatalError()
         }
         
@@ -190,6 +187,26 @@ class DatePickerViewModel {
         return nextHour
     }
     
+    private func firstStep(_ date: Date) -> Date {
+        var dateComponents = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: date)
+        
+        guard
+            let minute = dateComponents.minute,
+            let step = stepTime.minute,
+            let second = dateComponents.second
+        else {
+            fatalError()
+        }
+        let timeToStep = step - (minute % step)
+        
+        guard let first = dateConstant.calendar.date(byAdding: DateComponents(minute: timeToStep, second: -second), to: date) else {
+            fatalError()
+        }
+        
+        return first
+    }
+    
+    //Next Step
     private func startOfNext(step: Date) -> Date {
         var dateComponents = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: step)
         var minute = dateComponents.minute!

@@ -11,7 +11,7 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var pickerView: UIPickerView!
-    var x = DatePickerDataSource(start: "08:00", end: "17:00")
+    var x = DatePickerDataSource(start: "08:00", end: "07:20")
     override func viewDidLoad() {
         super.viewDidLoad()
         pickerView.dataSource = x

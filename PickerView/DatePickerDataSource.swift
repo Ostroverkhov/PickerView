@@ -16,21 +16,20 @@ enum  PickerDate: Int {
 }
 
 class DatePickerDataSource: NSObject,  UIPickerViewDataSource, UIPickerViewDelegate {
+    private var viewModel: DatePickerViewModel
     
-    var viewModel: DatePickerViewModel
-    
-    var days = [Day]()
-    var hours = [Hour]()
-    var minutes = [Minute]()
-    
+    private var days = [Day]()
+    private var hours = [Hour]()
+    private var minutes = [Minute]()
+    var timeDelivery: Date
     
     init(start: String, end: String) {
         viewModel = DatePickerViewModel(start: start, end: end)
         days = viewModel.createData()
         hours = days.first!.hours
         minutes = hours.first!.minutes
+        timeDelivery = minutes.first!.date
     }
-    
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return days.count
@@ -67,7 +66,8 @@ class DatePickerDataSource: NSObject,  UIPickerViewDataSource, UIPickerViewDeleg
             minutes = hours[row].minutes
             pickerView.reloadComponent(PickerDate.minute.rawValue)
         case .minute:
-            break
+            print(minutes[row])
+            timeDelivery = minutes[row].date
         }
     }
     
