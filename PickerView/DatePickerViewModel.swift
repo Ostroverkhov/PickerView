@@ -118,9 +118,9 @@ class DatePickerViewModel {
                 fatalError()
         }
         
-        self.startTime = startMinute(start)
-        self.endTime = startMinute(end)
-        self.currentTime = startMinute(current)
+        self.startTime = firstStep(start)
+        self.endTime = end
+        self.currentTime = firstStep(current)
         self.stepTime = step
         setComponets()
     }
@@ -144,9 +144,9 @@ class DatePickerViewModel {
                 fatalError()
         }
         
-        self.startTime = startMinute(start)
-        self.endTime = startMinute(endTime)
-        self.currentTime = startMinute(current)
+        self.startTime = firstStep(start)
+        self.endTime = endTime
+        self.currentTime = firstStep(current)
         setComponets()
     }
 
@@ -197,7 +197,7 @@ class DatePickerViewModel {
         else {
             fatalError()
         }
-        let timeToStep = step - (minute % step)
+        let timeToStep = (minute % step) == 0 ? 0 : step - (minute % step)
         
         guard let first = dateConstant.calendar.date(byAdding: DateComponents(minute: timeToStep, second: -second), to: date) else {
             fatalError()
@@ -207,15 +207,11 @@ class DatePickerViewModel {
     }
     
     //Next Step
-    private func startOfNext(step: Date) -> Date {
-        var dateComponents = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: step)
-        var minute = dateComponents.minute!
-        minute = minute % Int(stepTime.minute!)
-        minute = Int(stepTime.minute!) - minute
-        guard let step = dateConstant.calendar.date(byAdding: DateComponents(minute: minute, second: -dateComponents.second!), to: step) else {
+    private func next(step: Date) -> Date {
+        guard let nextStep = dateConstant.calendar.date(byAdding: stepTime, to: step) else {
             fatalError()
         }
-        return step
+        return nextStep
     }
     
     private func startMinute(_ date: Date) -> Date {
@@ -225,7 +221,7 @@ class DatePickerViewModel {
             return date
         }
         else {
-            return startOfNext(step: date)
+            return next(step: date)
         }
     }
  
@@ -337,11 +333,11 @@ class DatePickerViewModel {
         var step = startMinute(hour.start)
         var minute = Minute(date: step)
         arr.append(minute)
-        step = startOfNext(step: step)
+        step = next(step: step)
         while step < hour.end {
             minute = Minute(date: step)
             arr.append(minute)
-            step = startOfNext(step: step)
+            step = next(step: step)
         }
         return arr
     }
