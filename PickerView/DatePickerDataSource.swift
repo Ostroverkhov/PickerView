@@ -17,9 +17,9 @@ enum  PickerDate: Int {
 
 class DatePickerDataSource: NSObject,  UIPickerViewDataSource, UIPickerViewDelegate {
     
-    var viewModel = DatePickerViewModel(start: "08:00", end: "17:30")
+    var viewModel: DatePickerViewModel
     
-    var days: [Day] = [Day]()
+    var days = [Day]()
     var hours = [Hour]()
     var minutes = [Minute]()
     
@@ -60,12 +60,37 @@ class DatePickerDataSource: NSObject,  UIPickerViewDataSource, UIPickerViewDeleg
         switch count {
         case .day:
             hours = days[row].hours
+            pickerView.reloadComponent(PickerDate.hour.rawValue)
+            minutes = hours[pickerView.selectedRow(inComponent: PickerDate.hour.rawValue)].minutes
+            pickerView.reloadComponent(PickerDate.minute.rawValue)
         case .hour:
             minutes = hours[row].minutes
+            pickerView.reloadComponent(PickerDate.minute.rawValue)
         case .minute:
             break
         }
     }
     
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        guard let component = PickerDate(rawValue: component) else {
+            fatalError()
+        }
+        
+        let dayF = DateFormatter()
+        let hourF = DateFormatter()
+        let minF = DateFormatter()
+        dayF.dateFormat = "dd.MM"
+        hourF.dateFormat = "HH"
+        minF.dateFormat = "mm"
+        
+        switch component {
+        case .day:
+            return dayF.string(from: days[row].date)
+        case .hour:
+            return hourF.string(from: hours[row].date)
+        case .minute:
+            return minF.string(from: minutes[row].date)
+        }
+    }
 }
 
