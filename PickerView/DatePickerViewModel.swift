@@ -36,7 +36,7 @@ struct Minute {
 }
 
 
-struct DateConstant {//проанализировать
+struct DateConstant {
     var day: DateComponents {
         return DateComponents(day: 1)
     }
@@ -82,11 +82,10 @@ struct DateConstant {//проанализировать
     
     
 class DatePickerViewModel {
-    //TO DO: fix v
     var startTime: Date = Date()
     var endTime: Date = Date()
     var currentTime: Date = Date()
-    var stepTime: TimeInterval = 300.0
+    var stepTime: DateComponents = DateComponents(hour: 0, minute: 5)
     var countDays: Int = 3
     var deliveryTime: DateComponents = DateComponents(hour: 0, minute: 30)
     
@@ -96,34 +95,34 @@ class DatePickerViewModel {
     private var endComponents: DateComponents = DateComponents()
     private var currentComponents:DateComponents = DateComponents()
     
-    init(start: Date, end: Date, step: TimeInterval) {
+    init(start: Date, end: Date, step: DateComponents) {
         guard
             let start = dateConstant.calendar.date(byAdding: deliveryTime, to: start),
-            let end = dateConstant.calendar.date(byAdding: deliveryTime, to: end),
+            //let end = dateConstant.calendar.date(byAdding: deliveryTime, to: end),
             let current = dateConstant.calendar.date(byAdding: deliveryTime, to: currentTime)
         else {
             fatalError()
         }
         
-        self.startTime = startOfNext(step: start)
-        self.endTime = startOfNext(step: end)
-        self.currentTime = startOfNext(step: current)
+        self.startTime = startMinute(start) // startOfNext(step: start)
+        self.endTime = startMinute(end)
+        self.currentTime = startMinute(current)
         self.stepTime = step
         setComponets()
     }
     
-    init(start: Date, end: Date, current: Date, step: TimeInterval) {
+    init(start: Date, end: Date, current: Date, step: DateComponents) {
         guard
             let start = dateConstant.calendar.date(byAdding: deliveryTime, to: start),
-            let end = dateConstant.calendar.date(byAdding: deliveryTime, to: end),
+            //let end = dateConstant.calendar.date(byAdding: deliveryTime, to: end),
             let current = dateConstant.calendar.date(byAdding: deliveryTime, to: currentTime)
             else {
                 fatalError()
         }
         
-        self.startTime = startOfNext(step: start)
-        self.endTime = startOfNext(step: end)
-        self.currentTime = startOfNext(step: current)
+        self.startTime = startMinute(start)
+        self.endTime = startMinute(end)
+        self.currentTime = startMinute(current)
         self.stepTime = step
         setComponets()
     }
@@ -142,15 +141,15 @@ class DatePickerViewModel {
         
         guard
             let start = dateConstant.calendar.date(byAdding: deliveryTime, to: startTime),
-            let end = dateConstant.calendar.date(byAdding: deliveryTime, to: endTime),
+            //let end = dateConstant.calendar.date(byAdding: deliveryTime, to: endTime),
             let current = dateConstant.calendar.date(byAdding: deliveryTime, to: currentTime)
             else {
                 fatalError()
         }
         
-        self.startTime = startOfNext(step: start)
-        self.endTime = startOfNext(step: end)
-        self.currentTime = startOfNext(step: current)
+        self.startTime = startMinute(start)
+        self.endTime = startMinute(endTime)
+        self.currentTime = startMinute(current)
         setComponets()
     }
 
@@ -194,8 +193,8 @@ class DatePickerViewModel {
     private func startOfNext(step: Date) -> Date {
         var dateComponents = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: step)
         var minute = dateComponents.minute!
-        minute = minute % (Int(stepTime) / 60)
-        minute = (Int(stepTime) / 60) - minute
+        minute = minute % Int(stepTime.minute!)
+        minute = Int(stepTime.minute!) - minute
         guard let step = dateConstant.calendar.date(byAdding: DateComponents(minute: minute, second: -dateComponents.second!), to: step) else {
             fatalError()
         }
@@ -205,7 +204,7 @@ class DatePickerViewModel {
     private func startMinute(_ date: Date) -> Date {
         var dateComponents = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: date)
         let minute = dateComponents.minute!
-        if (minute % (Int(stepTime) / 60)) == 0 {
+        if (minute % Int(stepTime.minute!)) == 0 {
             return date
         }
         else {
@@ -238,11 +237,15 @@ class DatePickerViewModel {
             fatalError()
         }
         
+        guard let end1 = dateConstant.calendar.date(byAdding: DateComponents(second: -1), to: end) else {
+            fatalError()
+        }
+        
         var intervals = [DateInterval]()
         if start < end {
-            intervals.append(DateInterval(start: start, end: end))
+            intervals.append(DateInterval(start: start, end: end1))
         } else {
-            intervals.append(DateInterval(start: dateConstant.startOfDay(date), end: end))
+            intervals.append(DateInterval(start: dateConstant.startOfDay(date), end: end1))
             intervals.append(DateInterval(start: start, end: dateConstant.endOfDay(date)))
         }
         
@@ -273,11 +276,13 @@ class DatePickerViewModel {
     private func getArrayDays() -> [Day] {
         var result = [Day]()
         
-        var day = currentTime
-        let firstInterval = getWorkTime(for: day, with: currentTime)
+        
+        let firstInterval = getWorkTime(for: currentTime, with: currentTime)
         guard let firstDay = firstInterval.first?.start else {
             fatalError()
         }
+        var day = firstDay
+        
         result.append(Day(date: firstDay, intervals: firstInterval))
 
         for _ in 0..<(countDays - 1) {

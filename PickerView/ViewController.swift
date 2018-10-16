@@ -14,7 +14,7 @@ class ViewController: UIViewController {
     var start: DateComponents?
     var end: DateComponents?
     var curentTime: Date?
-    let date = DatePickerViewModel(start: "08:00", end: "07:30")
+    let date = DatePickerViewModel(start: "08:00", end: "17:30")
     var days = [Day]()
     var hours = [Hour]()
     var minutes = [Minute]()
