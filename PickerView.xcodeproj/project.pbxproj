@@ -12,7 +12,6 @@
 		AD0936CB21522C2C00227B52 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD0936C921522C2C00227B52 /* Main.storyboard */; };
 		AD0936CD21522C2E00227B52 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD0936CC21522C2E00227B52 /* Assets.xcassets */; };
 		AD0936D021522C2E00227B52 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD0936CE21522C2E00227B52 /* LaunchScreen.storyboard */; };
-		AD164D84216B2D7F00AABECF /* DatePickerViewModeLegasy.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD164D83216B2D7F00AABECF /* DatePickerViewModeLegasy.swift */; };
 		AD72048E216E12AB008720B6 /* DatePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD72048D216E12AB008720B6 /* DatePickerViewModel.swift */; };
 		AD99723C2174B36E007D8D84 /* DatePickerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD99723B2174B36E007D8D84 /* DatePickerDataSource.swift */; };
 /* End PBXBuildFile section */
@@ -25,7 +24,6 @@
 		AD0936CC21522C2E00227B52 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		AD0936CF21522C2E00227B52 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AD0936D121522C2E00227B52 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		AD164D83216B2D7F00AABECF /* DatePickerViewModeLegasy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewModeLegasy.swift; sourceTree = "<group>"; };
 		AD72048D216E12AB008720B6 /* DatePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewModel.swift; sourceTree = "<group>"; };
 		AD99723B2174B36E007D8D84 /* DatePickerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -66,7 +64,6 @@
 				AD0936CC21522C2E00227B52 /* Assets.xcassets */,
 				AD0936CE21522C2E00227B52 /* LaunchScreen.storyboard */,
 				AD0936D121522C2E00227B52 /* Info.plist */,
-				AD164D83216B2D7F00AABECF /* DatePickerViewModeLegasy.swift */,
 				AD72048D216E12AB008720B6 /* DatePickerViewModel.swift */,
 				AD99723B2174B36E007D8D84 /* DatePickerDataSource.swift */,
 			);
@@ -145,7 +142,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD72048E216E12AB008720B6 /* DatePickerViewModel.swift in Sources */,
-				AD164D84216B2D7F00AABECF /* DatePickerViewModeLegasy.swift in Sources */,
 				AD0936C821522C2C00227B52 /* ViewController.swift in Sources */,
 				AD0936C621522C2C00227B52 /* AppDelegate.swift in Sources */,
 				AD99723C2174B36E007D8D84 /* DatePickerDataSource.swift in Sources */,

@@ -10,5 +10,13 @@
             </PersistentString>
          </PersistentStrings>
       </ContextState>
+      <ContextState
+         contextName = "DatePickerViewModel.getArrayHoursInterval(_:):DatePickerViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "interval.end">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
    </ContextStates>
 </VariablesViewState>

@@ -79,10 +79,6 @@ class DatePickerViewModel {
     
     private var dateConstant = DateConstant()
     
-    private var startComponents: DateComponents = DateComponents()
-    private var endComponents: DateComponents = DateComponents()
-    private var currentComponents:DateComponents = DateComponents()
-    
     init(start: Date, end: Date, step: DateComponents) {
         guard
             let start = dateConstant.calendar.date(byAdding: deliveryTime, to: start),
@@ -95,7 +91,6 @@ class DatePickerViewModel {
         self.endTime = end
         self.currentTime = firstStep(current)
         self.stepTime = step
-        setComponets()
     }
     
     init(start: Date, end: Date, current: Date, step: DateComponents) {
@@ -110,12 +105,11 @@ class DatePickerViewModel {
         self.endTime = end
         self.currentTime = firstStep(current)
         self.stepTime = step
-        setComponets()
     }
     
     init(start: String, end: String) {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mm"
+        dateFormatter.dateFormat = "HH:mmZZZZZ"
         
         guard let startTime = dateFormatter.date(from: start) else {
             fatalError("invalid start date")
@@ -129,21 +123,14 @@ class DatePickerViewModel {
             let start = dateConstant.calendar.date(byAdding: deliveryTime, to: startTime),
             let current = dateConstant.calendar.date(byAdding: deliveryTime, to: currentTime)
         else {
-                fatalError()
+            fatalError()
         }
         
         self.startTime = firstStep(start)
         self.endTime = endTime
         self.currentTime = firstStep(current)
-        setComponets()
     }
 
-    private func setComponets() {
-        startComponents = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: startTime)
-        endComponents = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: endTime)
-        currentComponents = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: currentTime)
-    }
-    
     //Интервал до конца дня
     private func getTimeToEnd(of day: Date) -> DateInterval {
         return DateInterval(start: day, end: dateConstant.endOfDay(day))
@@ -169,7 +156,7 @@ class DatePickerViewModel {
         resultComponents.second = 0;
         
         guard let nextHour = resultComponents.date else {
-            fatalError()
+            preconditionFailure()
         }
         
         return nextHour
@@ -204,37 +191,44 @@ class DatePickerViewModel {
     
     //Время работы в конкретный день
     private func getWorkTime(for date: Date) -> [DateInterval] {
-        var todayTimeStart = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: date)
-        todayTimeStart.calendar = dateConstant.calendar
-        todayTimeStart.timeZone = dateConstant.timeZone
-        todayTimeStart.hour = startComponents.hour
-        todayTimeStart.minute = startComponents.minute
-        todayTimeStart.second = 0
+        let startComponents = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: startTime)
+        let endComponents = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: endTime)
         
-        var todayTimeEnd = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: date)
-        todayTimeEnd.calendar = dateConstant.calendar
-        todayTimeEnd.timeZone = dateConstant.timeZone
-        todayTimeEnd.hour = endComponents.hour
-        todayTimeEnd.minute = endComponents.minute
-        todayTimeEnd.second = 0
-        
-        guard let start = todayTimeStart.date else {
-            fatalError()
+        guard
+            let startHour = startComponents.hour,
+            let startMinute = startComponents.minute,
+            let endHour = endComponents.hour,
+            let endMinute = endComponents.minute
+            else {
+                fatalError()
         }
         
-        guard let end = todayTimeEnd.date else {
-            fatalError()
+        guard
+            let start = dateConstant.calendar.date(
+                bySettingHour: startHour,
+                minute: startMinute,
+                second: 0,
+                of: date
+            ),
+            let tempEnd = dateConstant.calendar.date(
+                bySettingHour: endHour,
+                minute: endMinute,
+                second: 0,
+                of: date
+            )
+        else {
+                fatalError()
         }
         
-        guard let end1 = dateConstant.calendar.date(byAdding: DateComponents(second: -1), to: end) else {
+        guard let end = dateConstant.calendar.date(byAdding: DateComponents(second: -1), to: tempEnd) else {
             fatalError()
         }
         
         var intervals = [DateInterval]()
         if start < end {
-            intervals.append(DateInterval(start: start, end: end1))
+            intervals.append(DateInterval(start: start, end: end))
         } else {
-            intervals.append(DateInterval(start: dateConstant.startOfDay(date), end: end1))
+            intervals.append(DateInterval(start: dateConstant.startOfDay(date), end: end))
             intervals.append(DateInterval(start: start, end: dateConstant.endOfDay(date)))
         }
         
@@ -283,14 +277,14 @@ class DatePickerViewModel {
         var arr = [Hour]()
         for interval in day.intervals {
             var hourStart = interval.start
-            var hourEnd = startOfNext(hour: interval.start)
+            var hourEnd = startOfNext(hour: hourStart) < interval.end ? startOfNext(hour: hourStart) : interval.end
             while(hourStart < interval.end) {
                 var hour = Hour(date: hourStart, intervals: DateInterval(start: hourStart, end: hourEnd))
                 arr.append(hour)
                 hourStart = startOfNext(hour: hourStart)
                 if(startOfNext(hour: hourEnd) <= interval.end) {
                     hourEnd = startOfNext(hour: hourEnd)
-                } else{
+                } else if (hourStart < interval.end) {
                     hourEnd = interval.end
                     hour = Hour(date: hourStart, intervals: DateInterval(start: hourStart, end: hourEnd))
                     arr.append(hour)
