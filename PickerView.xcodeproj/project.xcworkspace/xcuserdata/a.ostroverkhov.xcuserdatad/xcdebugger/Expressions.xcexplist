@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<VariablesViewState
+   version = "1.0">
+   <ContextStates>
+      <ContextState
+         contextName = "DatePickerViewModel.getTodayTimeWork():DatePickerViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "dateConstant.endOfDay(currentTime))">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+      <ContextState
+         contextName = "DatePickerViewModel.getArrayHoursInterval(_:):DatePickerViewModel.swift">
+         <PersistentStrings>
+            <PersistentString
+               value = "interval.end">
+            </PersistentString>
+         </PersistentStrings>
+      </ContextState>
+   </ContextStates>
+</VariablesViewState>
