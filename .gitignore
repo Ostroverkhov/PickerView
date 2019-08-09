@@ -1,0 +1,28 @@
+# generic files to ignore
+*.swp
+*.DB_Store
+*.DS_Store
+*.odt
+*~
+*.un~
+
+# xcode specific
+*~.nib
+build/*
+Build/*
+index/*
+*.pbxuser
+*.mode2v3
+*.mode1v3
+*.perspective
+*.perspectivev3
+
+# pods
+Pods/*
+
+# ignore private workspace stuff added by Xcode4
+xcuserdata
+*.xcodeproj/xcuserdata
+project.xcworkspace
+*.xcuserstate
+*.xcworkspace/xcshareddata

@@ -8,7 +8,7 @@
 
 import Foundation
 
-struct Day {
+@objc class Day: NSObject {
     let date: Date
     let intervals: [DateInterval]
     var hours: [Hour]
@@ -20,7 +20,7 @@ struct Day {
     }
 }
 
-struct Hour {
+@objc class Hour: NSObject {
     let date: Date
     let intervals: DateInterval
     var minutes: [Minute] = []
@@ -31,12 +31,16 @@ struct Hour {
     }
 }
 
-struct Minute {
+
+@objc class Minute: NSObject {
     let date: Date
+    init(date: Date) {
+        self.date = date
+    }
 }
 
 
-struct DateConstant {
+@objc class DateConstant: NSObject {
     var timeZone:TimeZone {
         return TimeZone.current
     }
@@ -69,68 +73,76 @@ struct DateConstant {
 }
     
     
-class DatePickerViewModel {
-    var startTime: Date = Date()
-    var endTime: Date = Date()
-    var currentTime: Date = Date()
-    var stepTime: DateComponents = DateComponents(minute: 5)
-    var countDays: Int = 3
-    var deliveryTime: DateComponents = DateComponents(hour: 0, minute: 30)
+@objc class DatePickerViewModel: NSObject {
+    private var startTime: Date = Date()
+    private var endTime: Date = Date()
+    private var nearestDeliveryDate: Date = Date()
+    private var stepTime: DateComponents = DateComponents(minute: 5)
+    private var countDays: Int = 2
+    private var deliveryTime: DateComponents = DateComponents(hour: 0, minute: 40)
     
     private var dateConstant = DateConstant()
     
-    init(start: Date, end: Date, step: DateComponents) {
-        guard
-            let start = dateConstant.calendar.date(byAdding: deliveryTime, to: start),
-            let current = dateConstant.calendar.date(byAdding: deliveryTime, to: currentTime)
-        else {
-            fatalError()
-        }
-        
-        self.startTime = firstStep(start)
-        self.endTime = end
-        self.currentTime = firstStep(current)
-        self.stepTime = step
+    override init() {
+        super.init()
     }
     
-    init(start: Date, end: Date, current: Date, step: DateComponents) {
+    init(
+        start: Date,
+        end: Date,
+        current: Date = Date(),
+        step: DateComponents = DateComponents(minute: 5),
+        count: Int = 2,
+        deliveryTime: DateComponents = DateComponents(hour: 0, minute: 40)
+        ) {
+        super.init()
+        
         guard
-            let start = dateConstant.calendar.date(byAdding: deliveryTime, to: start),
-            let current = dateConstant.calendar.date(byAdding: deliveryTime, to: currentTime)
-        else {
+            let tempStart = Calendar.current.date(byAdding: deliveryTime, to: start),
+            let tempEnd = Calendar.current.date(byAdding: deliveryTime, to: end),
+            let tempCurrent = Calendar.current.date(byAdding: deliveryTime, to: current)
+            else {
                 fatalError()
         }
         
-        self.startTime = firstStep(start)
-        self.endTime = end
-        self.currentTime = firstStep(current)
+        self.startTime = firstStep(tempStart)
+        self.endTime = firstStep(tempEnd)
+        self.nearestDeliveryDate = firstStep(tempCurrent)
         self.stepTime = step
+        self.countDays = count
+        self.deliveryTime = deliveryTime
     }
     
-    init(start: String, end: String) {
+    convenience init(start: String, end: String, format: String = "HH:mmZZZZZ") {
         let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "HH:mmZZZZZ"
-        
-        guard let startTime = dateFormatter.date(from: start) else {
-            fatalError("invalid start date")
-        }
-        
-        guard let endTime = dateFormatter.date(from: end) else {
-            fatalError("invalid end date")
-        }
+        dateFormatter.dateFormat = format
         
         guard
-            let start = dateConstant.calendar.date(byAdding: deliveryTime, to: startTime),
-            let current = dateConstant.calendar.date(byAdding: deliveryTime, to: currentTime)
-        else {
-            fatalError()
+            let startTime = dateFormatter.date(from: start),
+            let endTime = dateFormatter.date(from: end)
+            else {
+                fatalError("invalid date")
         }
         
-        self.startTime = firstStep(start)
-        self.endTime = endTime
-        self.currentTime = firstStep(current)
+        self.init(start: startTime, end: endTime, current: Date(), step: DateComponents(minute: 5))
     }
-
+    
+    convenience init(start: String, end: String, current: String, format: String = "dd:MM:yyyy'T'HH:mmZZZZ") {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = format
+        
+        
+        guard
+            let startTime = dateFormatter.date(from: start),
+            let endTime = dateFormatter.date(from: end),
+            let currentTime = dateFormatter.date(from: current)
+            else {
+                fatalError("invalid date")
+        }
+        
+        self.init(start: startTime, end: endTime, current: currentTime, step: DateComponents(minute: 5))
+    }
+    
     //Интервал до конца дня
     private func getTimeToEnd(of day: Date) -> DateInterval {
         return DateInterval(start: day, end: dateConstant.endOfDay(day))
@@ -169,8 +181,8 @@ class DatePickerViewModel {
             let minute = dateComponents.minute,
             let step = stepTime.minute,
             let second = dateComponents.second
-        else {
-            fatalError()
+            else {
+                fatalError()
         }
         let timeToStep = (minute % step) == 0 ? 0 : step - (minute % step)
         
@@ -216,26 +228,26 @@ class DatePickerViewModel {
                 second: 0,
                 of: date
             )
-        else {
+            else {
                 fatalError()
         }
         
-        guard let end = dateConstant.calendar.date(byAdding: DateComponents(second: -1), to: tempEnd) else {
-            fatalError()
-        }
         
         var intervals = [DateInterval]()
-        if start < end {
-            intervals.append(DateInterval(start: start, end: end))
-        } else {
-            intervals.append(DateInterval(start: dateConstant.startOfDay(date), end: end))
+        if start < tempEnd {
+            intervals.append(DateInterval(start: start, end: tempEnd))
+            
+        } else if start > tempEnd {
+            intervals.append(DateInterval(start: dateConstant.startOfDay(date), end: tempEnd))
             intervals.append(DateInterval(start: start, end: dateConstant.endOfDay(date)))
+            
+        } else if start == tempEnd{
+            intervals.append(DateInterval(start: dateConstant.startOfDay(date), end: dateConstant.endOfDay(date)))
         }
         
         return intervals
     }
     
-    //Ближайшее время работы в конкретный день, учитывая текущее время (ближайший рабочий интервал)
     private func getWorkTime(for date: Date, with time: Date) -> [DateInterval] {
         var resultIntervals = [DateInterval]()
         
@@ -254,18 +266,17 @@ class DatePickerViewModel {
         return resultIntervals
     }
     
-    //функция, которая создает дни
-    private func getArrayDays() -> [Day] {
+    private func getDays() -> [Day] {
         var result = [Day]()
         
-        let firstInterval = getWorkTime(for: currentTime, with: currentTime)
+        let firstInterval = getWorkTime(for: nearestDeliveryDate, with: nearestDeliveryDate)
         guard let firstDay = firstInterval.first?.start else {
             fatalError()
         }
         var day = firstDay
-        
+        self.nearestDeliveryDate = day
         result.append(Day(date: firstDay, intervals: firstInterval))
-
+        
         for _ in 0..<(countDays - 1) {
             day = startOfNext(day: day)
             result.append(Day(date: day, intervals: getWorkTime(for: day)))
@@ -273,7 +284,7 @@ class DatePickerViewModel {
         return result
     }
     
-    private func getArrayHoursInterval(_ day: Day) -> [Hour] {
+    private func getHours(for day: Day) -> [Hour] {
         var arr = [Hour]()
         for interval in day.intervals {
             var hourStart = interval.start
@@ -295,8 +306,7 @@ class DatePickerViewModel {
         return arr
     }
     
-
-    private func getArrayMinute(_ hour: DateInterval) -> [Minute] {
+    private func getMinutes(for hour: DateInterval) -> [Minute] {
         var arr = [Minute]()
         var step = firstStep(hour.start)
         var minute = Minute(date: step)
@@ -311,12 +321,12 @@ class DatePickerViewModel {
     }
     
     func createData() -> [Day] {
-        var days = getArrayDays()
+        var days = getDays()
         
         for i in 0..<days.count {
-            days[i].hours = getArrayHoursInterval(days[i])
+            days[i].hours = getHours(for: days[i])
             for j in 0..<days[i].hours.count {
-                days[i].hours[j].minutes = getArrayMinute(days[i].hours[j].intervals)
+                days[i].hours[j].minutes = getMinutes(for: days[i].hours[j].intervals)
             }
         }
         return days

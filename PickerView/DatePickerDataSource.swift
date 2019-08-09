@@ -15,32 +15,79 @@ enum  PickerDate: Int {
     case minute = 2
 }
 
-class DatePickerDataSource: NSObject,  UIPickerViewDataSource, UIPickerViewDelegate {
-    private var viewModel: DatePickerViewModel
+@objc class DatePickerDataSource: NSObject,  UIPickerViewDataSource, UIPickerViewDelegate {
+    private var viewModel = DatePickerViewModel()
     
     private var days = [Day]()
+    private var daysString = [String]()
     private var hours = [Hour]()
     private var minutes = [Minute]()
-    var timeDelivery: Date
     
-    init(start: String, end: String) {
-        viewModel = DatePickerViewModel(start: start, end: end)
-        days = viewModel.createData()
-        hours = days.first!.hours
-        minutes = hours.first!.minutes
-        timeDelivery = minutes.first!.date
+    var timeDelivery: Date = Date()
+    
+    override init() {
+        super.init()
     }
     
+    private func createDateString(_ days: [Day]) -> [String] {
+        return days.map{(day: Day) -> String in
+            if Calendar.current.isDateInToday(day.date) {
+                return "Сегодня"
+            } else if Calendar.current.isDateInTomorrow(day.date) {
+                return "Завтра"
+            }
+            let dayF = DateFormatter()
+            dayF.dateFormat = "d MMM"
+            return dayF.string(from: day.date)
+        }
+    }
+    
+    private func setParams(_ days: [Day]) {
+        guard
+            let h = days.first?.hours,
+            let m = h.first?.minutes,
+            let t = m.first?.date
+            else {
+                fatalError()
+        }
+        
+        hours = h
+        minutes = m
+        timeDelivery = t
+    }
+    
+    convenience init(start: String, end: String) {
+        self.init()
+        viewModel = DatePickerViewModel(start: start, end: end)
+        days = viewModel.createData()
+        
+        daysString = createDateString(days)
+        
+        setParams(days)
+    }
+    
+    
+    convenience init(startDate: Date, endDate: Date) {
+        self.init()
+        viewModel = DatePickerViewModel(start: startDate, end: endDate, step: DateComponents(minute: 5))
+        days = viewModel.createData()
+        
+        daysString = createDateString(days)
+        
+        setParams(days)
+    }
+    
+    
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
-        return days.count
+        return 3
     }
     
     func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-    
+        
         guard let count = PickerDate(rawValue: component) else {
             fatalError()
         }
-    
+        
         switch count {
         case .day:
             return days.count
@@ -62,11 +109,15 @@ class DatePickerDataSource: NSObject,  UIPickerViewDataSource, UIPickerViewDeleg
             pickerView.reloadComponent(PickerDate.hour.rawValue)
             minutes = hours[pickerView.selectedRow(inComponent: PickerDate.hour.rawValue)].minutes
             pickerView.reloadComponent(PickerDate.minute.rawValue)
+            
+            timeDelivery = minutes[pickerView.selectedRow(inComponent: PickerDate.minute.rawValue)].date
+            
         case .hour:
             minutes = hours[row].minutes
             pickerView.reloadComponent(PickerDate.minute.rawValue)
+            timeDelivery = minutes[pickerView.selectedRow(inComponent: PickerDate.minute.rawValue)].date
+            
         case .minute:
-            print(minutes[row])
             timeDelivery = minutes[row].date
         }
     }
@@ -76,21 +127,55 @@ class DatePickerDataSource: NSObject,  UIPickerViewDataSource, UIPickerViewDeleg
             fatalError()
         }
         
-        let dayF = DateFormatter()
         let hourF = DateFormatter()
         let minF = DateFormatter()
-        dayF.dateFormat = "dd.MM"
         hourF.dateFormat = "HH"
         minF.dateFormat = "mm"
         
         switch component {
         case .day:
-            return dayF.string(from: days[row].date)
+            return daysString[row]
         case .hour:
             return hourF.string(from: hours[row].date)
         case .minute:
             return minF.string(from: minutes[row].date)
         }
     }
+    
+    func pickerView(_ pickerView: UIPickerView, widthForComponent component: Int) -> CGFloat {
+        switch (component) {
+        case 0:
+            return pickerView.bounds.size.width / 3.0
+        default:
+            return 80.0;
+        }
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, attributedTitleForRow row: Int, forComponent component: Int) -> NSAttributedString? {
+        
+        guard let component = PickerDate(rawValue: component) else {
+            fatalError()
+        }
+        let dic: [String: Any] = [NSForegroundColorAttributeName: UIColor(white: 0.4, alpha: 1), NSFontAttributeName: UIFont.systemFontSize]
+        
+        let hourF = DateFormatter()
+        let minF = DateFormatter()
+        hourF.dateFormat = "HH"
+        minF.dateFormat = "mm"
+        
+        var s: String
+        switch component {
+        case .day:
+            s =  daysString[row]
+        case .hour:
+            s = hourF.string(from: hours[row].date)
+        case .minute:
+            s = minF.string(from: minutes[row].date)
+        }
+        
+        return  NSAttributedString(string: s, attributes: dic)
+    }
 }
+
+
 
