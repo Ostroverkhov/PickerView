@@ -7,73 +7,8 @@
 //
 
 import Foundation
-
-@objc class Day: NSObject {
-    let date: Date
-    let intervals: [DateInterval]
-    var hours: [Hour]
     
-    init(date: Date, intervals: [DateInterval]) {
-        self.date = date
-        self.intervals = intervals
-        self.hours = []
-    }
-}
-
-@objc class Hour: NSObject {
-    let date: Date
-    let intervals: DateInterval
-    var minutes: [Minute] = []
-    
-    init(date: Date, intervals: DateInterval) {
-        self.date = date
-        self.intervals = intervals
-    }
-}
-
-
-@objc class Minute: NSObject {
-    let date: Date
-    init(date: Date) {
-        self.date = date
-    }
-}
-
-
-@objc class DateConstant: NSObject {
-    var timeZone:TimeZone {
-        return TimeZone.current
-    }
-    
-    var calendar: Calendar {
-        return Calendar.current
-    }
-    
-    func startOfDay(_ date: Date) -> Date {
-        return calendar.startOfDay(for: date)
-    }
-    
-    func endOfDay(_ date: Date) -> Date {
-        
-        guard
-            let nextDay = calendar.date(
-                byAdding: DateComponents(day: 1),
-                to: calendar.startOfDay(for: date)
-            ),
-            
-            let endDay = calendar.date(
-                byAdding: DateComponents(second: -1),
-                to: calendar.startOfDay(for: nextDay)
-            )
-            else {
-                fatalError()
-        }
-        return endDay
-    }
-}
-    
-    
-@objc class DatePickerViewModel: NSObject {
+@objcMembers class DatePickerViewModel: NSObject {
     private var startTime: Date = Date()
     private var endTime: Date = Date()
     private var nearestDeliveryDate: Date = Date()
@@ -332,3 +267,4 @@ import Foundation
         return days
     }
 }
+

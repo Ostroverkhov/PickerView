@@ -15,15 +15,15 @@ enum  PickerDate: Int {
     case minute = 2
 }
 
-@objc class DatePickerDataSource: NSObject,  UIPickerViewDataSource, UIPickerViewDelegate {
-    private var viewModel = DatePickerViewModel()
+@objcMembers class DatePickerDataSource: NSObject,  UIPickerViewDataSource, UIPickerViewDelegate {
     
+    var timeDelivery: Date = Date()
+    
+    private var viewModel = DatePickerViewModel()
     private var days = [Day]()
     private var daysString = [String]()
     private var hours = [Hour]()
     private var minutes = [Minute]()
-    
-    var timeDelivery: Date = Date()
     
     override init() {
         super.init()
@@ -71,13 +71,10 @@ enum  PickerDate: Int {
         self.init()
         viewModel = DatePickerViewModel(start: startDate, end: endDate, step: DateComponents(minute: 5))
         days = viewModel.createData()
-        
         daysString = createDateString(days)
-        
         setParams(days)
     }
-    
-    
+
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 3
     }
@@ -156,7 +153,10 @@ enum  PickerDate: Int {
         guard let component = PickerDate(rawValue: component) else {
             fatalError()
         }
-        let dic: [String: Any] = [NSForegroundColorAttributeName: UIColor(white: 0.4, alpha: 1), NSFontAttributeName: UIFont.systemFontSize]
+        let dic = [
+            NSAttributedString.Key.foregroundColor: UIColor(white: 0.4, alpha: 1),
+            NSAttributedString.Key.font: UIFont.systemFont(ofSize: 14)
+        ]
         
         let hourF = DateFormatter()
         let minF = DateFormatter()
