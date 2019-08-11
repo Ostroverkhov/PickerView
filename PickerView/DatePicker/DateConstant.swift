@@ -38,4 +38,8 @@ import Foundation
         }
         return endDay
     }
+    
+    func weekDay(_ date: Date) -> Int {
+        return calendar.component(.weekday, from: date)
+    }
 }

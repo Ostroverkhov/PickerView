@@ -11,7 +11,7 @@ import Foundation
 @objcMembers class DatePickerViewModel: NSObject {
     
     //MARK: - public properties
-    var week = [WeekDayWorkTime]()
+    var week = [WeekDayWorkTime?]()
     var startTime: Date = Date()
     var endTime: Date = Date()
     var stepTime: DateComponents = DateComponents(minute: 5)
@@ -20,11 +20,19 @@ import Foundation
 
     //MARK: - private properties
     private var nearestDeliveryDate: Date = Date()
-    private var dateConstant = DateConstant()    
+    private var dateConstant = DateConstant()
     
     //MARK: - init
     override init() {
         super.init()
+    }
+    
+    init(
+        week: [WeekDayWorkTime],
+        countDays: Int = 5
+        ) {
+        self.week = week
+        self.countDays = countDays
     }
     
     init(
