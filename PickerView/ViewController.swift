@@ -11,12 +11,11 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var pickerView: UIPickerView!
-//    var data = DatePickerDataSource(start: "09:01+03:00", end: "08:59+03:00")
+    var data = DatePickerDataSource(start: "09:01+03:00", end: "08:59+03:00")
     override func viewDidLoad() {
         super.viewDidLoad()
 //        print(Date())
-//        pickerView.dataSource = data
-//        pickerView.delegate = data
-        print(Locale.availableIdentifiers)
+        pickerView.dataSource = data
+        pickerView.delegate = data
     }
 }

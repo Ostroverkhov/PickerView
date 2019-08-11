@@ -9,15 +9,20 @@
 import Foundation
     
 @objcMembers class DatePickerViewModel: NSObject {
-    private var startTime: Date = Date()
-    private var endTime: Date = Date()
+    
+    //MARK: - public properties
+    var week = [WeekDayWorkTime]()
+    var startTime: Date = Date()
+    var endTime: Date = Date()
+    var stepTime: DateComponents = DateComponents(minute: 5)
+    var countDays: Int = 5
+    var deliveryTime: DateComponents = DateComponents(hour: 0, minute: 40)
+
+    //MARK: - private properties
     private var nearestDeliveryDate: Date = Date()
-    private var stepTime: DateComponents = DateComponents(minute: 5)
-    private var countDays: Int = 2
-    private var deliveryTime: DateComponents = DateComponents(hour: 0, minute: 40)
+    private var dateConstant = DateConstant()    
     
-    private var dateConstant = DateConstant()
-    
+    //MARK: - init
     override init() {
         super.init()
     }
@@ -55,8 +60,8 @@ import Foundation
         guard
             let startTime = dateFormatter.date(from: start),
             let endTime = dateFormatter.date(from: end)
-            else {
-                fatalError("invalid date")
+        else {
+            fatalError("invalid date")
         }
         
         self.init(start: startTime, end: endTime, current: Date(), step: DateComponents(minute: 5))
@@ -78,6 +83,21 @@ import Foundation
         self.init(start: startTime, end: endTime, current: currentTime, step: DateComponents(minute: 5))
     }
     
+    //MARK: - public methods
+    func createData() -> [Day] {
+        var days = getDays()
+        
+        for i in 0..<days.count {
+            days[i].hours = getHours(for: days[i])
+            for j in 0..<days[i].hours.count {
+                days[i].hours[j].minutes = getMinutes(for: days[i].hours[j].intervals)
+            }
+        }
+        return days
+    }
+    
+    //MARK: - private methods
+
     //Интервал до конца дня
     private func getTimeToEnd(of day: Date) -> DateInterval {
         return DateInterval(start: day, end: dateConstant.endOfDay(day))
@@ -187,7 +207,7 @@ import Foundation
         var resultIntervals = [DateInterval]()
         
         let intervalsWork = getWorkTime(for: date)
-        let intervalToEnd = getTimeToEnd(of: date)
+        let intervalToEnd = getTimeToEnd(of: time)
         
         for interval in intervalsWork {
             if let intersection = intervalToEnd.intersection(with: interval) {
@@ -253,18 +273,6 @@ import Foundation
             step = next(step: step)
         }
         return arr
-    }
-    
-    func createData() -> [Day] {
-        var days = getDays()
-        
-        for i in 0..<days.count {
-            days[i].hours = getHours(for: days[i])
-            for j in 0..<days[i].hours.count {
-                days[i].hours[j].minutes = getMinutes(for: days[i].hours[j].intervals)
-            }
-        }
-        return days
     }
 }
 

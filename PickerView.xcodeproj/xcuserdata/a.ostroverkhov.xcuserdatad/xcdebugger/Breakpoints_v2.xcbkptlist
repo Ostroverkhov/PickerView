@@ -6,105 +6,11 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PickerView/ViewController.swift"
-            timestampString = "564670537.011089"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "15"
-            endingLineNumber = "15"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-            <Locations>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "PickerView.ViewController.data.getter : PickerView.DatePickerDataSource"
-                  moduleName = "PickerView"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/ViewController.swift"
-                  timestampString = "564670371.334986"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14"
-                  offsetFromSymbolStart = "114">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "PickerView.ViewController.data.setter : PickerView.DatePickerDataSource"
-                  moduleName = "PickerView"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/ViewController.swift"
-                  timestampString = "564670371.339835"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14"
-                  offsetFromSymbolStart = "128">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "PickerView.ViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; PickerView.ViewController"
-                  moduleName = "PickerView"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/ViewController.swift"
-                  timestampString = "564670371.344162"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14"
-                  offsetFromSymbolStart = "166">
-               </Location>
-               <Location
-                  shouldBeEnabled = "No"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "PickerView.ViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;PickerView.ViewController&gt;"
-                  moduleName = "PickerView"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/ViewController.swift"
-                  timestampString = "564670371.348258"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "14"
-                  endingLineNumber = "14"
-                  offsetFromSymbolStart = "131">
-               </Location>
-            </Locations>
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PickerView/ViewController.swift"
-            timestampString = "564670537.0556"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "20"
-            endingLineNumber = "20"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "PickerView/ViewController.swift"
-            timestampString = "564670537.056577"
+            timestampString = "587038976.287447"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "13"
@@ -116,11 +22,11 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "PickerView.ViewController.pickerView.getter : weak Swift.Optional&lt;__C.UIPickerView&gt;"
+                  symbolName = "PickerView.ViewController.pickerView.getter : Swift.Optional&lt;__C.UIPickerView&gt;"
                   moduleName = "PickerView"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/ViewController.swift"
-                  timestampString = "564670538.10906"
+                  timestampString = "587034793.298648"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "13"
@@ -131,11 +37,11 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "PickerView.ViewController.pickerView.setter : weak Swift.Optional&lt;__C.UIPickerView&gt;"
+                  symbolName = "PickerView.ViewController.pickerView.setter : Swift.Optional&lt;__C.UIPickerView&gt;"
                   moduleName = "PickerView"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/ViewController.swift"
-                  timestampString = "564670538.11384"
+                  timestampString = "587034793.302501"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "13"
@@ -146,16 +52,46 @@
                   shouldBeEnabled = "Yes"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
-                  symbolName = "PickerView.ViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; PickerView.ViewController"
+                  symbolName = "PickerView.ViewController.pickerView.modify : Swift.Optional&lt;__C.UIPickerView&gt;"
                   moduleName = "PickerView"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/ViewController.swift"
-                  timestampString = "564670538.118775"
+                  timestampString = "587034793.3064179"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "69">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PickerView.ViewController.pickerView.modify : Swift.Optional&lt;__C.UIPickerView&gt; with unmangled suffix &quot;.resume.0&quot;"
+                  moduleName = "PickerView"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/ViewController.swift"
+                  timestampString = "587034793.310272"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "13"
                   endingLineNumber = "13"
-                  offsetFromSymbolStart = "57">
+                  offsetFromSymbolStart = "72">
+               </Location>
+               <Location
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PickerView.ViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; PickerView.ViewController"
+                  moduleName = "PickerView"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/ViewController.swift"
+                  timestampString = "587034793.314304"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "13"
+                  endingLineNumber = "13"
+                  offsetFromSymbolStart = "178">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -165,12 +101,12 @@
                   moduleName = "PickerView"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/ViewController.swift"
-                  timestampString = "564670538.123787"
+                  timestampString = "587034793.31814"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "13"
                   endingLineNumber = "13"
-                  offsetFromSymbolStart = "50">
+                  offsetFromSymbolStart = "107">
                </Location>
             </Locations>
          </BreakpointContent>
