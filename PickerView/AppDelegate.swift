@@ -16,6 +16,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        
+        let weekManager = WeekManager(
+            week: [
+                WeekDayWorkTime(start: "09:00+03:00", end: "18:00+03:00"),
+                WeekDayWorkTime(start: "09:00+03:00", end: "18:00+03:00"),
+                WeekDayWorkTime(start: "09:18+03:00", end: "18:00+03:00"),
+                WeekDayWorkTime(start: "09:00+03:00", end: "18:00+03:00"),
+                WeekDayWorkTime(start: "09:00+03:00", end: "18:00+03:00"),
+                WeekDayWorkTime(start: "09:00+03:00", end: "18:00+03:00"),
+                WeekDayWorkTime(start: "09:00+03:00", end: "18:00+03:00"),
+            ])
+        
+        weekManager.getDayModels()
+        print(weekManager.getDays())
         return true
     }
 

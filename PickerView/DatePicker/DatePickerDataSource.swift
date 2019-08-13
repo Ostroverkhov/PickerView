@@ -19,7 +19,7 @@ enum  PickerDate: Int {
     
     var timeDelivery: Date = Date()
     
-    private var viewModel = DatePickerViewModel()
+    private var viewModel = DatePickerDayModel()
     private var days = [Day]()
     private var daysString = [String]()
     private var hours = [Hour]()
@@ -58,7 +58,7 @@ enum  PickerDate: Int {
     
     convenience init(start: String, end: String) {
         self.init()
-        viewModel = DatePickerViewModel(start: start, end: end)
+        viewModel = DatePickerDayModel(start: start, end: end)
         days = viewModel.createData()
         
         daysString = createDateString(days)
@@ -69,7 +69,7 @@ enum  PickerDate: Int {
     
     convenience init(startDate: Date, endDate: Date) {
         self.init()
-        viewModel = DatePickerViewModel(start: startDate, end: endDate, step: DateComponents(minute: 5))
+        viewModel = DatePickerDayModel(start: startDate, end: endDate, step: DateComponents(minute: 5))
         days = viewModel.createData()
         daysString = createDateString(days)
         setParams(days)

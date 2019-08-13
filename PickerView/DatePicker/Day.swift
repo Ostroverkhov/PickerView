@@ -18,4 +18,10 @@ import Foundation
         self.intervals = intervals
         self.hours = []
     }
+    
+    override var description: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd:MM:yyyy'T'HH:mmZZZZ"
+        return dateFormatter.string(from: date)
+    }
 }

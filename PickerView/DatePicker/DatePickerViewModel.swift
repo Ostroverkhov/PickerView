@@ -8,10 +8,9 @@
 
 import Foundation
     
-@objcMembers class DatePickerViewModel: NSObject {
+@objcMembers class DatePickerDayModel: NSObject {
     
     //MARK: - public properties
-    var week = [WeekDayWorkTime?]()
     var startTime: Date = Date()
     var endTime: Date = Date()
     var stepTime: DateComponents = DateComponents(minute: 5)
@@ -25,14 +24,6 @@ import Foundation
     //MARK: - init
     override init() {
         super.init()
-    }
-    
-    init(
-        week: [WeekDayWorkTime],
-        countDays: Int = 5
-        ) {
-        self.week = week
-        self.countDays = countDays
     }
     
     init(
@@ -104,6 +95,72 @@ import Foundation
         return days
     }
     
+    
+    //Время работы в конкретный день
+    func workTime(for date: Date) -> [DateInterval] {
+        let startComponents = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: startTime)
+        let endComponents = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: endTime)
+        
+        guard
+            let startHour = startComponents.hour,
+            let startMinute = startComponents.minute,
+            let endHour = endComponents.hour,
+            let endMinute = endComponents.minute
+            else {
+                fatalError()
+        }
+        
+        guard
+            let start = dateConstant.calendar.date(
+                bySettingHour: startHour,
+                minute: startMinute,
+                second: 0,
+                of: date
+            ),
+            let tempEnd = dateConstant.calendar.date(
+                bySettingHour: endHour,
+                minute: endMinute,
+                second: 0,
+                of: date
+            )
+            else {
+                fatalError()
+        }
+        
+        
+        var intervals = [DateInterval]()
+        if start < tempEnd {
+            intervals.append(DateInterval(start: start, end: tempEnd))
+            
+        } else if start > tempEnd {
+            intervals.append(DateInterval(start: dateConstant.startOfDay(date), end: tempEnd))
+            intervals.append(DateInterval(start: start, end: dateConstant.endOfDay(date)))
+            
+        } else if start == tempEnd{
+            intervals.append(DateInterval(start: dateConstant.startOfDay(date), end: dateConstant.endOfDay(date)))
+        }
+        
+        return intervals
+    }
+    
+    func workTime(for date: Date, with time: Date) -> [DateInterval] {
+        var resultIntervals = [DateInterval]()
+        
+        let intervalsWork = workTime(for: date)
+        let intervalToEnd = getTimeToEnd(of: time)
+        
+        for interval in intervalsWork {
+            if let intersection = intervalToEnd.intersection(with: interval) {
+                resultIntervals.append(intersection)
+            }
+        }
+        if (resultIntervals.isEmpty){
+            let nextday = startOfNext(day: date)
+            resultIntervals = workTime(for: nextday)
+        }
+        return resultIntervals
+    }
+    
     //MARK: - private methods
 
     //Интервал до конца дня
@@ -164,75 +221,12 @@ import Foundation
         return nextStep
     }
     
-    //Время работы в конкретный день
-    private func getWorkTime(for date: Date) -> [DateInterval] {
-        let startComponents = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: startTime)
-        let endComponents = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: endTime)
-        
-        guard
-            let startHour = startComponents.hour,
-            let startMinute = startComponents.minute,
-            let endHour = endComponents.hour,
-            let endMinute = endComponents.minute
-            else {
-                fatalError()
-        }
-        
-        guard
-            let start = dateConstant.calendar.date(
-                bySettingHour: startHour,
-                minute: startMinute,
-                second: 0,
-                of: date
-            ),
-            let tempEnd = dateConstant.calendar.date(
-                bySettingHour: endHour,
-                minute: endMinute,
-                second: 0,
-                of: date
-            )
-            else {
-                fatalError()
-        }
-        
-        
-        var intervals = [DateInterval]()
-        if start < tempEnd {
-            intervals.append(DateInterval(start: start, end: tempEnd))
-            
-        } else if start > tempEnd {
-            intervals.append(DateInterval(start: dateConstant.startOfDay(date), end: tempEnd))
-            intervals.append(DateInterval(start: start, end: dateConstant.endOfDay(date)))
-            
-        } else if start == tempEnd{
-            intervals.append(DateInterval(start: dateConstant.startOfDay(date), end: dateConstant.endOfDay(date)))
-        }
-        
-        return intervals
-    }
-    
-    private func getWorkTime(for date: Date, with time: Date) -> [DateInterval] {
-        var resultIntervals = [DateInterval]()
-        
-        let intervalsWork = getWorkTime(for: date)
-        let intervalToEnd = getTimeToEnd(of: time)
-        
-        for interval in intervalsWork {
-            if let intersection = intervalToEnd.intersection(with: interval) {
-                resultIntervals.append(intersection)
-            }
-        }
-        if (resultIntervals.isEmpty){
-            let nextday = startOfNext(day: date)
-            resultIntervals = getWorkTime(for: nextday)
-        }
-        return resultIntervals
-    }
+
     
     private func getDays() -> [Day] {
         var result = [Day]()
         
-        let firstInterval = getWorkTime(for: nearestDeliveryDate, with: nearestDeliveryDate)
+        let firstInterval = workTime(for: nearestDeliveryDate, with: nearestDeliveryDate)
         guard let firstDay = firstInterval.first?.start else {
             fatalError()
         }
@@ -242,7 +236,7 @@ import Foundation
         
         for _ in 0..<(countDays - 1) {
             day = startOfNext(day: day)
-            result.append(Day(date: day, intervals: getWorkTime(for: day)))
+            result.append(Day(date: day, intervals: workTime(for: day)))
         }
         return result
     }

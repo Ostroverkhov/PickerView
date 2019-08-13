@@ -10,7 +10,7 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PickerView/ViewController.swift"
-            timestampString = "587038976.287447"
+            timestampString = "587386323.123313"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "13"
@@ -26,7 +26,7 @@
                   moduleName = "PickerView"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/ViewController.swift"
-                  timestampString = "587034793.298648"
+                  timestampString = "587377071.290841"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "13"
@@ -41,7 +41,7 @@
                   moduleName = "PickerView"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/ViewController.swift"
-                  timestampString = "587034793.302501"
+                  timestampString = "587377071.294966"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "13"
@@ -56,7 +56,7 @@
                   moduleName = "PickerView"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/ViewController.swift"
-                  timestampString = "587034793.3064179"
+                  timestampString = "587377071.299196"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
@@ -71,7 +71,7 @@
                   moduleName = "PickerView"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/ViewController.swift"
-                  timestampString = "587034793.310272"
+                  timestampString = "587377071.303062"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "13"
@@ -86,12 +86,12 @@
                   moduleName = "PickerView"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/ViewController.swift"
-                  timestampString = "587034793.314304"
+                  timestampString = "587377071.306818"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "13"
                   endingLineNumber = "13"
-                  offsetFromSymbolStart = "178">
+                  offsetFromSymbolStart = "207">
                </Location>
                <Location
                   shouldBeEnabled = "Yes"
@@ -101,14 +101,30 @@
                   moduleName = "PickerView"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/ViewController.swift"
-                  timestampString = "587034793.31814"
+                  timestampString = "587377071.310514"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "13"
                   endingLineNumber = "13"
-                  offsetFromSymbolStart = "107">
+                  offsetFromSymbolStart = "112">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "Index/WeekDayWorkTime.swift"
+            timestampString = "587386747.562909"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "30"
+            endingLineNumber = "30"
+            landmarkName = "init(start:end:stepTime:deliveryTime:)"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

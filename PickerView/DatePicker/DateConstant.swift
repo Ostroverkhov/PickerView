@@ -17,6 +17,10 @@ import Foundation
         return Calendar.current
     }
     
+    var weekDaysCount: Int {
+        return 7
+    }
+    
     func startOfDay(_ date: Date) -> Date {
         return calendar.startOfDay(for: date)
     }
@@ -40,6 +44,7 @@ import Foundation
     }
     
     func weekDay(_ date: Date) -> Int {
-        return calendar.component(.weekday, from: date)
+        let value = calendar.component(.weekday, from: date)
+        return value == 1 ? 6 : value - 2
     }
 }
