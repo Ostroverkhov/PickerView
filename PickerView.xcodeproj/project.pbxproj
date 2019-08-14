@@ -16,9 +16,8 @@
 		AD597AF022FD6EF100AA0B9D /* Minute.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD597AEC22FD6EF100AA0B9D /* Minute.swift */; };
 		AD597AF122FD6EF100AA0B9D /* Hour.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD597AED22FD6EF100AA0B9D /* Hour.swift */; };
 		AD597AF222FD6EF100AA0B9D /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD597AEE22FD6EF100AA0B9D /* Day.swift */; };
-		AD72048E216E12AB008720B6 /* DatePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD72048D216E12AB008720B6 /* DatePickerViewModel.swift */; };
 		AD82656222FFFE11005B65D3 /* WeekDayWorkTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD82656122FFFE11005B65D3 /* WeekDayWorkTime.swift */; };
-		AD82656423000180005B65D3 /* WeekManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD82656323000180005B65D3 /* WeekManager.swift */; };
+		AD82656423000180005B65D3 /* DatePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD82656323000180005B65D3 /* DatePickerViewModel.swift */; };
 		AD99723C2174B36E007D8D84 /* DatePickerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD99723B2174B36E007D8D84 /* DatePickerDataSource.swift */; };
 /* End PBXBuildFile section */
 
@@ -34,9 +33,8 @@
 		AD597AEC22FD6EF100AA0B9D /* Minute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Minute.swift; path = /Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/DatePicker/Minute.swift; sourceTree = "<absolute>"; };
 		AD597AED22FD6EF100AA0B9D /* Hour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hour.swift; sourceTree = "<group>"; };
 		AD597AEE22FD6EF100AA0B9D /* Day.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
-		AD72048D216E12AB008720B6 /* DatePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewModel.swift; sourceTree = "<group>"; };
 		AD82656122FFFE11005B65D3 /* WeekDayWorkTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WeekDayWorkTime.swift; path = Index/WeekDayWorkTime.swift; sourceTree = SOURCE_ROOT; };
-		AD82656323000180005B65D3 /* WeekManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekManager.swift; sourceTree = "<group>"; };
+		AD82656323000180005B65D3 /* DatePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewModel.swift; sourceTree = "<group>"; };
 		AD99723B2174B36E007D8D84 /* DatePickerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -84,14 +82,13 @@
 		AD597AF322FD6F7700AA0B9D /* DatePicker */ = {
 			isa = PBXGroup;
 			children = (
-				AD72048D216E12AB008720B6 /* DatePickerViewModel.swift */,
 				AD99723B2174B36E007D8D84 /* DatePickerDataSource.swift */,
 				AD597AEB22FD6EF000AA0B9D /* DateConstant.swift */,
 				AD597AEE22FD6EF100AA0B9D /* Day.swift */,
 				AD597AED22FD6EF100AA0B9D /* Hour.swift */,
 				AD597AEC22FD6EF100AA0B9D /* Minute.swift */,
 				AD82656122FFFE11005B65D3 /* WeekDayWorkTime.swift */,
-				AD82656323000180005B65D3 /* WeekManager.swift */,
+				AD82656323000180005B65D3 /* DatePickerViewModel.swift */,
 			);
 			path = DatePicker;
 			sourceTree = "<group>";
@@ -168,14 +165,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD72048E216E12AB008720B6 /* DatePickerViewModel.swift in Sources */,
 				AD597AF022FD6EF100AA0B9D /* Minute.swift in Sources */,
 				AD597AF222FD6EF100AA0B9D /* Day.swift in Sources */,
 				AD0936C821522C2C00227B52 /* ViewController.swift in Sources */,
 				AD0936C621522C2C00227B52 /* AppDelegate.swift in Sources */,
 				AD597AEF22FD6EF100AA0B9D /* DateConstant.swift in Sources */,
 				AD99723C2174B36E007D8D84 /* DatePickerDataSource.swift in Sources */,
-				AD82656423000180005B65D3 /* WeekManager.swift in Sources */,
+				AD82656423000180005B65D3 /* DatePickerViewModel.swift in Sources */,
 				AD82656222FFFE11005B65D3 /* WeekDayWorkTime.swift in Sources */,
 				AD597AF122FD6EF100AA0B9D /* Hour.swift in Sources */,
 			);

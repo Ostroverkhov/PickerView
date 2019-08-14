@@ -2,104 +2,108 @@
 //  DatePickerViewModel.swift
 //  PickerView
 //
-//  Created by a.ostroverkhov on 10/10/2018.
-//  Copyright © 2018 a.ostroverkhov. All rights reserved.
+//  Created by Alexey Ostroverkhov on 11/08/2019.
+//  Copyright © 2019 a.ostroverkhov. All rights reserved.
 //
 
 import Foundation
-    
-@objcMembers class DatePickerDayModel: NSObject {
+
+@objcMembers class DatePickerViewModel {
     
     //MARK: - public properties
-    var startTime: Date = Date()
-    var endTime: Date = Date()
-    var stepTime: DateComponents = DateComponents(minute: 5)
-    var countDays: Int = 5
-    var deliveryTime: DateComponents = DateComponents(hour: 0, minute: 40)
-
+    var week = [WeekDayWorkTime]()
+    var countDays: Int
+    var stepTime: DateComponents
+    var deliveryTime: DateComponents
+    
     //MARK: - private properties
     private var nearestDeliveryDate: Date = Date()
     private var dateConstant = DateConstant()
     
     //MARK: - init
-    override init() {
-        super.init()
-    }
-    
     init(
-        start: Date,
-        end: Date,
+        week: [WeekDayWorkTime],
         current: Date = Date(),
-        step: DateComponents = DateComponents(minute: 5),
-        count: Int = 2,
-        deliveryTime: DateComponents = DateComponents(hour: 0, minute: 40)
+        countDays: Int = 22,
+        step: DateComponents = DateComponents(minute: 15),
+        deliveryTime: DateComponents = DateComponents(hour: 0, minute: 0)
         ) {
-        super.init()
         
+        self.countDays = countDays
+        self.stepTime = step
+        self.deliveryTime = deliveryTime
+
+        self.week = week.map {
+            guard
+                let tempStart = Calendar.current.date(byAdding: deliveryTime, to: $0.start),
+                let tempEnd = Calendar.current.date(byAdding: deliveryTime, to: $0.end)
+                else {
+                    fatalError()
+            }
+            return WeekDayWorkTime(
+                start: firstStep(tempStart),
+                end: firstStep(tempEnd)
+            )
+        }
         guard
-            let tempStart = Calendar.current.date(byAdding: deliveryTime, to: start),
-            let tempEnd = Calendar.current.date(byAdding: deliveryTime, to: end),
             let tempCurrent = Calendar.current.date(byAdding: deliveryTime, to: current)
             else {
                 fatalError()
         }
         
-        self.startTime = firstStep(tempStart)
-        self.endTime = firstStep(tempEnd)
         self.nearestDeliveryDate = firstStep(tempCurrent)
-        self.stepTime = step
-        self.countDays = count
-        self.deliveryTime = deliveryTime
     }
     
-    convenience init(start: String, end: String, format: String = "HH:mmZZZZZ") {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
-        
-        guard
-            let startTime = dateFormatter.date(from: start),
-            let endTime = dateFormatter.date(from: end)
-        else {
-            fatalError("invalid date")
-        }
-        
-        self.init(start: startTime, end: endTime, current: Date(), step: DateComponents(minute: 5))
-    }
     
-    convenience init(start: String, end: String, current: String, format: String = "dd:MM:yyyy'T'HH:mmZZZZ") {
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = format
-        
-        
-        guard
-            let startTime = dateFormatter.date(from: start),
-            let endTime = dateFormatter.date(from: end),
-            let currentTime = dateFormatter.date(from: current)
-            else {
-                fatalError("invalid date")
-        }
-        
-        self.init(start: startTime, end: endTime, current: currentTime, step: DateComponents(minute: 5))
-    }
-    
-    //MARK: - public methods
     func createData() -> [Day] {
         var days = getDays()
         
         for i in 0..<days.count {
             days[i].hours = getHours(for: days[i])
             for j in 0..<days[i].hours.count {
-                days[i].hours[j].minutes = getMinutes(for: days[i].hours[j].intervals)
+                let minutes = getMinutes(for: days[i].hours[j].intervals)
+                days[i].hours[j].minutes = minutes
+                days[i].minutes += minutes
             }
         }
         return days
     }
     
     
+    func getDayModels() -> [[DateInterval]] {
+        
+        var result = [[DateInterval]]()
+        
+//        var date = Date()
+
+        let weekNumber = dateConstant.weekDay(nearestDeliveryDate)
+        let first = week[weekNumber]
+        let intervals = workTime(for: nearestDeliveryDate, with: nearestDeliveryDate, start: first.start, end: first.end)
+        result.append(intervals)
+        
+        var date = nearestDeliveryDate
+        for _ in 1..<countDays {
+            date = startOfNext(day: date)
+            let index = dateConstant.weekDay(date)
+            let weekDay = week[index]
+            let intervals = workTime(for: date, start: weekDay.start, end: weekDay.end)
+            result.append(intervals)
+        }
+        
+        return result
+    }
+  
     //Время работы в конкретный день
-    func workTime(for date: Date) -> [DateInterval] {
-        let startComponents = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: startTime)
-        let endComponents = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: endTime)
+    func workTime(for date: Date, start: Date, end: Date) -> [DateInterval] {
+        let startComponents = dateConstant.calendar.dateComponents(
+            in: dateConstant.timeZone,
+            from: start
+        )
+        
+        let endComponents = dateConstant.calendar.dateComponents(
+            in: dateConstant.timeZone,
+            from: end
+        )
         
         guard
             let startHour = startComponents.hour,
@@ -143,10 +147,11 @@ import Foundation
         return intervals
     }
     
-    func workTime(for date: Date, with time: Date) -> [DateInterval] {
+    func workTime(for date: Date, with time: Date, start: Date, end: Date) -> [DateInterval] {
         var resultIntervals = [DateInterval]()
         
-        let intervalsWork = workTime(for: date)
+        let time = firstStep(time)
+        let intervalsWork = workTime(for: date, start: start, end: end)
         let intervalToEnd = getTimeToEnd(of: time)
         
         for interval in intervalsWork {
@@ -154,94 +159,41 @@ import Foundation
                 resultIntervals.append(intersection)
             }
         }
-        if (resultIntervals.isEmpty){
+        while resultIntervals.isEmpty {
             let nextday = startOfNext(day: date)
-            resultIntervals = workTime(for: nextday)
+            let nextDayNumber = dateConstant.weekDay(nextday)
+            let day = week[nextDayNumber]
+            resultIntervals = workTime(for: nextday, start: day.start, end: day.end)
         }
         return resultIntervals
     }
     
-    //MARK: - private methods
-
-    //Интервал до конца дня
     private func getTimeToEnd(of day: Date) -> DateInterval {
         return DateInterval(start: day, end: dateConstant.endOfDay(day))
     }
     
-    //начало следущего дня
-    private func startOfNext(day: Date) -> Date {
-        guard let result = dateConstant.calendar.date(byAdding: DateComponents(second: 1), to: dateConstant.endOfDay(day)) else {
-            fatalError()
-        }
-        return result
-    }
-    
-    //Начало следущего часа
-    private func startOfNext(hour: Date) -> Date {
-        
-        guard let result = dateConstant.calendar.date(byAdding: DateComponents(hour: 1), to: hour) else {
-            fatalError()
-        }
-        
-        var resultComponents = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: result)
-        resultComponents.minute = 0;
-        resultComponents.second = 0;
-        
-        guard let nextHour = resultComponents.date else {
-            preconditionFailure()
-        }
-        
-        return nextHour
-    }
-    
-    private func firstStep(_ date: Date) -> Date {
-        var dateComponents = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: date)
-        
-        guard
-            let minute = dateComponents.minute,
-            let step = stepTime.minute,
-            let second = dateComponents.second
-            else {
-                fatalError()
-        }
-        let timeToStep = (minute % step) == 0 ? 0 : step - (minute % step)
-        
-        guard let first = dateConstant.calendar.date(byAdding: DateComponents(minute: timeToStep, second: -second), to: date) else {
-            fatalError()
-        }
-        
-        return first
-    }
-    
-    //Next Step
-    private func next(step: Date) -> Date {
-        guard let nextStep = dateConstant.calendar.date(byAdding: stepTime, to: step) else {
-            fatalError()
-        }
-        return nextStep
-    }
-    
-
-    
-    private func getDays() -> [Day] {
+    func getDays() -> [Day] {
         var result = [Day]()
-        
-        let firstInterval = workTime(for: nearestDeliveryDate, with: nearestDeliveryDate)
-        guard let firstDay = firstInterval.first?.start else {
+        let intervals = getDayModels()
+//        let nearestDeliveryDate = Date()
+//        let firstInterval = workTime(for: nearestDeliveryDate, with: nearestDeliveryDate, start: Date(), end: Date())
+        guard
+            let firstInterval = intervals.first,
+            let firstDay = firstInterval.first?.start else {
             fatalError()
         }
         var day = firstDay
         self.nearestDeliveryDate = day
         result.append(Day(date: firstDay, intervals: firstInterval))
         
-        for _ in 0..<(countDays - 1) {
+        for i in 1..<countDays {
             day = startOfNext(day: day)
-            result.append(Day(date: day, intervals: workTime(for: day)))
+            result.append(Day(date: day, intervals: intervals[i]))
         }
         return result
     }
     
-    private func getHours(for day: Day) -> [Hour] {
+    func getHours(for day: Day) -> [Hour] {
         var arr = [Hour]()
         for interval in day.intervals {
             var hourStart = interval.start
@@ -263,7 +215,7 @@ import Foundation
         return arr
     }
     
-    private func getMinutes(for hour: DateInterval) -> [Minute] {
+    func getMinutes(for hour: DateInterval) -> [Minute] {
         var arr = [Minute]()
         var step = firstStep(hour.start)
         var minute = Minute(date: step)
@@ -276,5 +228,55 @@ import Foundation
         }
         return arr
     }
+    
+    //MARK - steps
+    func firstStep(_ date: Date) -> Date {
+        var dateComponents = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: date)
+        
+        guard
+            let minute = dateComponents.minute,
+            let step = stepTime.minute,
+            let second = dateComponents.second
+            else {
+                fatalError()
+        }
+        let timeToStep = (minute % step) == 0 ? 0 : step - (minute % step)
+        
+        guard let first = dateConstant.calendar.date(byAdding: DateComponents(minute: timeToStep, second: -second), to: date) else {
+            fatalError()
+        }
+        
+        return first
+    }
+    
+    private func next(step: Date) -> Date {
+        guard let nextStep = dateConstant.calendar.date(byAdding: stepTime, to: step) else {
+            fatalError()
+        }
+        return nextStep
+    }
+    
+    func startOfNext(day: Date) -> Date {
+        guard let result = dateConstant.calendar.date(byAdding: DateComponents(second: 1), to: dateConstant.endOfDay(day)) else {
+            fatalError()
+        }
+        return result
+    }
+    
+    private func startOfNext(hour: Date) -> Date {
+        
+        guard let result = dateConstant.calendar.date(byAdding: DateComponents(hour: 1), to: hour) else {
+            fatalError()
+        }
+        
+        var resultComponents = dateConstant.calendar.dateComponents(in: dateConstant.timeZone, from: result)
+        resultComponents.minute = 0;
+        resultComponents.second = 0;
+        
+        guard let nextHour = resultComponents.date else {
+            preconditionFailure()
+        }
+        
+        return nextHour
+    }
 }
-
