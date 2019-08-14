@@ -19,7 +19,17 @@ enum  PickerDate: Int {
     
     var timeDelivery: Date = Date()
     
-    private var viewModel = DatePickerDayModel()
+//    private var viewModel = DatePickerDayModel()
+    private var viewModel = WeekManager(
+            week: [
+                WeekDayWorkTime(start: "00:00+03:00", end: "23:59+03:00"),
+                WeekDayWorkTime(start: "00:00+03:00", end: "00:00+03:00"),
+                WeekDayWorkTime(start: "09:30+03:00", end: "08:00+03:00"),
+                WeekDayWorkTime(start: "09:00+03:00", end: "18:00+03:00"),
+                WeekDayWorkTime(start: "12:00+03:00", end: "13:00+03:00"),
+                WeekDayWorkTime(start: "09:00+03:00", end: "00:00+03:00"),
+                WeekDayWorkTime(start: "09:00+03:00", end: "18:00+03:00"),
+            ])
     private var days = [Day]()
     private var daysString = [String]()
     private var hours = [Hour]()
@@ -58,7 +68,7 @@ enum  PickerDate: Int {
     
     convenience init(start: String, end: String) {
         self.init()
-        viewModel = DatePickerDayModel(start: start, end: end)
+//        viewModel = DatePickerDayModel(start: start, end: end)
         days = viewModel.createData()
         
         daysString = createDateString(days)
@@ -69,7 +79,7 @@ enum  PickerDate: Int {
     
     convenience init(startDate: Date, endDate: Date) {
         self.init()
-        viewModel = DatePickerDayModel(start: startDate, end: endDate, step: DateComponents(minute: 5))
+//        viewModel = DatePickerDayModel(start: startDate, end: endDate, step: DateComponents(minute: 5))
         days = viewModel.createData()
         daysString = createDateString(days)
         setParams(days)

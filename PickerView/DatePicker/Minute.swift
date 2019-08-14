@@ -13,4 +13,10 @@ import Foundation
     init(date: Date) {
         self.date = date
     }
+    
+    override var description: String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "HH:mmZZZZ"
+        return dateFormatter.string(from: date)
+    }
 }
