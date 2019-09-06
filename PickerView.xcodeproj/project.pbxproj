@@ -33,7 +33,7 @@
 		AD597AEC22FD6EF100AA0B9D /* Minute.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Minute.swift; path = /Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/DatePicker/Minute.swift; sourceTree = "<absolute>"; };
 		AD597AED22FD6EF100AA0B9D /* Hour.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Hour.swift; sourceTree = "<group>"; };
 		AD597AEE22FD6EF100AA0B9D /* Day.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Day.swift; sourceTree = "<group>"; };
-		AD82656122FFFE11005B65D3 /* WeekDayWorkTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WeekDayWorkTime.swift; path = Index/WeekDayWorkTime.swift; sourceTree = SOURCE_ROOT; };
+		AD82656122FFFE11005B65D3 /* WeekDayWorkTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WeekDayWorkTime.swift; path = PickerView/DatePicker/WeekDayWorkTime.swift; sourceTree = SOURCE_ROOT; };
 		AD82656323000180005B65D3 /* DatePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewModel.swift; sourceTree = "<group>"; };
 		AD99723B2174B36E007D8D84 /* DatePickerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerDataSource.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
