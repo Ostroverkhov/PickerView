@@ -13,21 +13,25 @@ import Foundation
     //MARK: - public properties
     var start: Date
     var end: Date
+    var dayNumber: Int
     
     //MARK: - private properties
     private var dateConstant = DateConstant()
 
     init(
         start: Date,
-        end: Date
+        end: Date,
+        dayNumber: Int
         ) {
         self.start = start
         self.end = end
+        self.dayNumber = dayNumber
     }
     
     convenience init(
         start: String,
         end: String,
+        dayNumber: Int,
         format: String = "HH:mmZZZZZ"
         ) {
         
@@ -43,7 +47,8 @@ import Foundation
         
         self.init(
             start: startTime,
-            end: endTime
+            end: endTime,
+            dayNumber: dayNumber
         )
     }
 }

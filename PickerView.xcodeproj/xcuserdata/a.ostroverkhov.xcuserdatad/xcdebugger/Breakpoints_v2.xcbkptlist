@@ -1,12 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Bucket
+   uuid = "55298114-F7D0-4B93-938F-27E94126147B"
    type = "1"
    version = "2.0">
    <Breakpoints>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            uuid = "D5D0654F-F7CD-49F8-93C9-61BF46494264"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "PickerView/ViewController.swift"
@@ -19,96 +21,688 @@
             landmarkType = "3">
             <Locations>
                <Location
-                  shouldBeEnabled = "Yes"
+                  uuid = "D5D0654F-F7CD-49F8-93C9-61BF46494264 - 7c6527b9045f43ac"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "PickerView.ViewController.pickerView.getter : Swift.Optional&lt;__C.UIPickerView&gt;"
                   moduleName = "PickerView"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/ViewController.swift"
-                  timestampString = "587377071.290841"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "13"
                   endingLineNumber = "13"
-                  offsetFromSymbolStart = "86">
+                  offsetFromSymbolStart = "132">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  uuid = "D5D0654F-F7CD-49F8-93C9-61BF46494264 - dd9ca8294133a3b8"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "PickerView.ViewController.pickerView.setter : Swift.Optional&lt;__C.UIPickerView&gt;"
                   moduleName = "PickerView"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/ViewController.swift"
-                  timestampString = "587377071.294966"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "13"
                   endingLineNumber = "13"
-                  offsetFromSymbolStart = "106">
+                  offsetFromSymbolStart = "188">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  uuid = "D5D0654F-F7CD-49F8-93C9-61BF46494264 - 3919170d12c2abaf"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "PickerView.ViewController.pickerView.modify : Swift.Optional&lt;__C.UIPickerView&gt;"
                   moduleName = "PickerView"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/ViewController.swift"
-                  timestampString = "587377071.299196"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "0"
                   endingLineNumber = "0"
-                  offsetFromSymbolStart = "69">
+                  offsetFromSymbolStart = "72">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  uuid = "D5D0654F-F7CD-49F8-93C9-61BF46494264 - e329528f92df8953"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "PickerView.ViewController.pickerView.modify : Swift.Optional&lt;__C.UIPickerView&gt; with unmangled suffix &quot;.resume.0&quot;"
                   moduleName = "PickerView"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/ViewController.swift"
-                  timestampString = "587377071.303062"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "13"
                   endingLineNumber = "13"
-                  offsetFromSymbolStart = "72">
+                  offsetFromSymbolStart = "80">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  uuid = "D5D0654F-F7CD-49F8-93C9-61BF46494264 - dd917ac7a8d51b54"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "PickerView.ViewController.init(nibName: Swift.Optional&lt;Swift.String&gt;, bundle: Swift.Optional&lt;__C.NSBundle&gt;) -&gt; PickerView.ViewController"
                   moduleName = "PickerView"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/ViewController.swift"
-                  timestampString = "587377071.306818"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "13"
                   endingLineNumber = "13"
-                  offsetFromSymbolStart = "207">
+                  offsetFromSymbolStart = "168">
                </Location>
                <Location
-                  shouldBeEnabled = "Yes"
+                  uuid = "D5D0654F-F7CD-49F8-93C9-61BF46494264 - 61c1b39e45e849eb"
+                  shouldBeEnabled = "No"
                   ignoreCount = "0"
                   continueAfterRunningActions = "No"
                   symbolName = "PickerView.ViewController.init(coder: __C.NSCoder) -&gt; Swift.Optional&lt;PickerView.ViewController&gt;"
                   moduleName = "PickerView"
                   usesParentBreakpointCondition = "Yes"
                   urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/ViewController.swift"
-                  timestampString = "587377071.310514"
                   startingColumnNumber = "9223372036854775807"
                   endingColumnNumber = "9223372036854775807"
                   startingLineNumber = "13"
                   endingLineNumber = "13"
-                  offsetFromSymbolStart = "112">
+                  offsetFromSymbolStart = "116">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4C8A4437-D3D6-4E9C-8442-E5E053AFCEE6"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PickerView/DatePicker/DatePickerViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "99"
+            endingLineNumber = "99"
+            landmarkName = "getWeekDay(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "66C6E679-63DE-4E33-84E9-B78BD8941321"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PickerView/DatePicker/DatePickerViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "61"
+            endingLineNumber = "61"
+            landmarkName = "createData()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "66C6E679-63DE-4E33-84E9-B78BD8941321 - 130940c02f545047"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PickerView.DatePickerViewModel.createData() -&gt; Swift.Array&lt;PickerView.Day&gt;"
+                  moduleName = "PickerView"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/DatePicker/DatePickerViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "128">
+               </Location>
+               <Location
+                  uuid = "66C6E679-63DE-4E33-84E9-B78BD8941321 - cc539770b57097af"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PickerViewTests.DatePickerViewModel.createData() -&gt; Swift.Array&lt;PickerViewTests.Day&gt;"
+                  moduleName = "PickerViewTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/DatePicker/DatePickerViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "61"
+                  endingLineNumber = "61"
+                  offsetFromSymbolStart = "128">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "19F59C9B-23CB-4113-9F51-D2B66C421898"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PickerView/DatePicker/DatePickerViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "63"
+            endingLineNumber = "63"
+            landmarkName = "createData()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "19F59C9B-23CB-4113-9F51-D2B66C421898 - 130940c02f545047"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PickerView.DatePickerViewModel.createData() -&gt; Swift.Array&lt;PickerView.Day&gt;"
+                  moduleName = "PickerView"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/DatePicker/DatePickerViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
+                  offsetFromSymbolStart = "182">
+               </Location>
+               <Location
+                  uuid = "19F59C9B-23CB-4113-9F51-D2B66C421898 - cc539770b57097af"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PickerViewTests.DatePickerViewModel.createData() -&gt; Swift.Array&lt;PickerViewTests.Day&gt;"
+                  moduleName = "PickerViewTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/DatePicker/DatePickerViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "63"
+                  endingLineNumber = "63"
+                  offsetFromSymbolStart = "182">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "E7A1930E-B8E1-43D1-98B8-409F2AE54722"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PickerView/DatePicker/DatePickerViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
+            landmarkName = "getWeekDay(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8234C94A-6C4C-4A7C-96F5-5C5A1811A305"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PickerView/DatePickerTest.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "13"
+            endingLineNumber = "13"
+            landmarkName = "setUp()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "9CCF8273-110B-4BB5-AA75-91DF30C9C199"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PickerViewTests/PickerViewTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "68"
+            endingLineNumber = "68"
+            landmarkName = "testDayModels()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "8DD5325A-ABD7-4EC0-9346-33762500F542"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PickerView/DatePicker/DatePickerViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "createData()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "8DD5325A-ABD7-4EC0-9346-33762500F542 - 130940c02f545047"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PickerView.DatePickerViewModel.createData() -&gt; Swift.Array&lt;PickerView.Day&gt;"
+                  moduleName = "PickerView"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/DatePicker/DatePickerViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "64"
+                  endingLineNumber = "64"
+                  offsetFromSymbolStart = "659">
+               </Location>
+               <Location
+                  uuid = "8DD5325A-ABD7-4EC0-9346-33762500F542 - cc539770b57097af"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PickerViewTests.DatePickerViewModel.createData() -&gt; Swift.Array&lt;PickerViewTests.Day&gt;"
+                  moduleName = "PickerViewTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/DatePicker/DatePickerViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "64"
+                  endingLineNumber = "64"
+                  offsetFromSymbolStart = "659">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CA021AFC-2A70-4FBE-9EF6-6F0FDD168360"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PickerViewTests/PickerViewTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "testWorkTimeWithTime()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "200502D0-D29C-4D42-A100-32D952CD03C5"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PickerView/DatePicker/DatePickerViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "77"
+            endingLineNumber = "77"
+            landmarkName = "getDayModels()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "200502D0-D29C-4D42-A100-32D952CD03C5 - 91507e903decb0e9"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PickerView.DatePickerViewModel.getDayModels() -&gt; Swift.Array&lt;Swift.Array&lt;Foundation.DateInterval&gt;&gt;"
+                  moduleName = "PickerView"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/DatePicker/DatePickerViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "77"
+                  endingLineNumber = "77"
+                  offsetFromSymbolStart = "289">
+               </Location>
+               <Location
+                  uuid = "200502D0-D29C-4D42-A100-32D952CD03C5 - 20bed86a4bd2bbc3"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PickerViewTests.DatePickerViewModel.getDayModels() -&gt; Swift.Array&lt;Swift.Array&lt;Foundation.DateInterval&gt;&gt;"
+                  moduleName = "PickerViewTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/DatePicker/DatePickerViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "77"
+                  endingLineNumber = "77"
+                  offsetFromSymbolStart = "289">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "80804808-2B2F-4328-BD1C-6D0104CFC628"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PickerView/DatePicker/DatePickerViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
+            landmarkName = "getDayModels()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "80804808-2B2F-4328-BD1C-6D0104CFC628 - 91507e903decb0e9"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PickerView.DatePickerViewModel.getDayModels() -&gt; Swift.Array&lt;Swift.Array&lt;Foundation.DateInterval&gt;&gt;"
+                  moduleName = "PickerView"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/DatePicker/DatePickerViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "83"
+                  endingLineNumber = "83"
+                  offsetFromSymbolStart = "1610">
+               </Location>
+               <Location
+                  uuid = "80804808-2B2F-4328-BD1C-6D0104CFC628 - 20bed86a4bd2bbc3"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PickerViewTests.DatePickerViewModel.getDayModels() -&gt; Swift.Array&lt;Swift.Array&lt;Foundation.DateInterval&gt;&gt;"
+                  moduleName = "PickerViewTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/DatePicker/DatePickerViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "83"
+                  endingLineNumber = "83"
+                  offsetFromSymbolStart = "1610">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "CEBD7C53-0B4C-414C-87A2-8231DA482858"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PickerView/DatePicker/DatePickerViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "getWeekDay(_:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "CEBD7C53-0B4C-414C-87A2-8231DA482858 - 2ea4704bf4eb0cbb"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PickerView.DatePickerViewModel.getWeekDay(inout Foundation.Date) -&gt; PickerView.WeekDayWorkTime"
+                  moduleName = "PickerView"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/DatePicker/DatePickerViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "96"
+                  endingLineNumber = "96"
+                  offsetFromSymbolStart = "147">
+               </Location>
+               <Location
+                  uuid = "CEBD7C53-0B4C-414C-87A2-8231DA482858 - 3510c83c7237689a"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PickerViewTests.DatePickerViewModel.getWeekDay(inout Foundation.Date) -&gt; PickerViewTests.WeekDayWorkTime"
+                  moduleName = "PickerViewTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/DatePicker/DatePickerViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "96"
+                  endingLineNumber = "96"
+                  offsetFromSymbolStart = "147">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "59A63D9F-33A6-4EF7-8C03-4C479FEB49CF"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PickerView/DatePicker/DatePickerViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "32"
+            endingLineNumber = "32"
+            landmarkName = "init(week:current:countDays:step:deliveryTime:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "59A63D9F-33A6-4EF7-8C03-4C479FEB49CF - a6746fd700771de0"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PickerView.DatePickerViewModel.init(week: Swift.Array&lt;PickerView.WeekDayWorkTime&gt;, current: Foundation.Date, countDays: Swift.Int, step: Foundation.DateComponents, deliveryTime: Foundation.DateComponents) -&gt; PickerView.DatePickerViewModel"
+                  moduleName = "PickerView"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/DatePicker/DatePickerViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "929">
+               </Location>
+               <Location
+                  uuid = "59A63D9F-33A6-4EF7-8C03-4C479FEB49CF - f7cb68d065f4684b"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PickerViewTests.DatePickerViewModel.init(week: Swift.Array&lt;PickerViewTests.WeekDayWorkTime&gt;, current: Foundation.Date, countDays: Swift.Int, step: Foundation.DateComponents, deliveryTime: Foundation.DateComponents) -&gt; PickerViewTests.DatePickerViewModel"
+                  moduleName = "PickerViewTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/DatePicker/DatePickerViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "929">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F808CC38-A8F7-4637-BBA8-3327824CE3BD"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PickerView/DatePicker/DatePickerViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "55"
+            endingLineNumber = "55"
+            landmarkName = "init(week:current:countDays:step:deliveryTime:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "F808CC38-A8F7-4637-BBA8-3327824CE3BD - a6746fd700771de0"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PickerView.DatePickerViewModel.init(week: Swift.Array&lt;PickerView.WeekDayWorkTime&gt;, current: Foundation.Date, countDays: Swift.Int, step: Foundation.DateComponents, deliveryTime: Foundation.DateComponents) -&gt; PickerView.DatePickerViewModel"
+                  moduleName = "PickerView"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/DatePicker/DatePickerViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "1801">
+               </Location>
+               <Location
+                  uuid = "F808CC38-A8F7-4637-BBA8-3327824CE3BD - f7cb68d065f4684b"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PickerViewTests.DatePickerViewModel.init(week: Swift.Array&lt;PickerViewTests.WeekDayWorkTime&gt;, current: Foundation.Date, countDays: Swift.Int, step: Foundation.DateComponents, deliveryTime: Foundation.DateComponents) -&gt; PickerViewTests.DatePickerViewModel"
+                  moduleName = "PickerViewTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/DatePicker/DatePickerViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "55"
+                  endingLineNumber = "55"
+                  offsetFromSymbolStart = "1801">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "5D188387-E052-4C2F-887A-9A6609C2B81D"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PickerViewTests/PickerViewTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "64"
+            endingLineNumber = "64"
+            landmarkName = "testDayModels()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "1708804B-B1D4-40CA-A606-C9E7FCCAAEC0"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PickerView/DatePicker/DatePickerViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
+            landmarkName = "init(week:current:countDays:step:deliveryTime:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "1708804B-B1D4-40CA-A606-C9E7FCCAAEC0 - a6746fd700771de0"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PickerView.DatePickerViewModel.init(week: Swift.Array&lt;PickerView.WeekDayWorkTime&gt;, current: Foundation.Date, countDays: Swift.Int, step: Foundation.DateComponents, deliveryTime: Foundation.DateComponents) -&gt; PickerView.DatePickerViewModel"
+                  moduleName = "PickerView"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/DatePicker/DatePickerViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "50"
+                  endingLineNumber = "50"
+                  offsetFromSymbolStart = "1629">
+               </Location>
+               <Location
+                  uuid = "1708804B-B1D4-40CA-A606-C9E7FCCAAEC0 - f7cb68d065f4684b"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "PickerViewTests.DatePickerViewModel.init(week: Swift.Array&lt;PickerViewTests.WeekDayWorkTime&gt;, current: Foundation.Date, countDays: Swift.Int, step: Foundation.DateComponents, deliveryTime: Foundation.DateComponents) -&gt; PickerViewTests.DatePickerViewModel"
+                  moduleName = "PickerViewTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/DatePicker/DatePickerViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "50"
+                  endingLineNumber = "50"
+                  offsetFromSymbolStart = "1629">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BB996FF6-BD99-440B-A6D0-F001274433A7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PickerView/DatePicker/DatePickerViewModel.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
+            landmarkName = "init(week:current:countDays:step:deliveryTime:)"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "BB996FF6-BD99-440B-A6D0-F001274433A7 - 804994f95f1da090"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (PickerView.WeekDayWorkTime) -&gt; PickerView.WeekDayWorkTime in PickerView.DatePickerViewModel.init(week: Swift.Array&lt;PickerView.WeekDayWorkTime&gt;, current: Foundation.Date, countDays: Swift.Int, step: Foundation.DateComponents, deliveryTime: Foundation.DateComponents) -&gt; PickerView.DatePickerViewModel"
+                  moduleName = "PickerView"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/DatePicker/DatePickerViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "901">
+               </Location>
+               <Location
+                  uuid = "BB996FF6-BD99-440B-A6D0-F001274433A7 - 7397291bf1c5f18c"
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (PickerViewTests.WeekDayWorkTime) -&gt; PickerViewTests.WeekDayWorkTime in PickerViewTests.DatePickerViewModel.init(week: Swift.Array&lt;PickerViewTests.WeekDayWorkTime&gt;, current: Foundation.Date, countDays: Swift.Int, step: Foundation.DateComponents, deliveryTime: Foundation.DateComponents) -&gt; PickerViewTests.DatePickerViewModel"
+                  moduleName = "PickerViewTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/a.ostroverkhov/Documents/Projects/PickerView/PickerView/DatePicker/DatePickerViewModel.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "43"
+                  endingLineNumber = "43"
+                  offsetFromSymbolStart = "901">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "671B060D-D81D-464F-8A7A-9E4793F37B74"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "PickerViewTests/PickerViewTests.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "testDays()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

@@ -27,14 +27,19 @@ enum  PickerDate: Int {
     override init() {
         viewModel = DatePickerViewModel(
             week: [
-                WeekDayWorkTime(start: "00:00+03:00", end: "23:59+03:00"),
-                WeekDayWorkTime(start: "00:00+03:00", end: "00:00+03:00"),
-                WeekDayWorkTime(start: "09:30+03:00", end: "08:00+03:00"),
-                WeekDayWorkTime(start: "09:00+03:00", end: "18:00+03:00"),
-                WeekDayWorkTime(start: "12:00+03:00", end: "13:00+03:00"),
-                WeekDayWorkTime(start: "09:00+03:00", end: "00:00+03:00"),
-                WeekDayWorkTime(start: "09:00+03:00", end: "05:00+03:00"),
-            ])
+//                WeekDayWorkTime(start: "00:00+03:00", end: "23:59+03:00", dayNumber: 0),
+                WeekDayWorkTime(start: "00:00+03:00", end: "00:00+03:00", dayNumber: 1),
+                WeekDayWorkTime(start: "09:30+03:00", end: "08:00+03:00", dayNumber: 2),
+                WeekDayWorkTime(start: "09:00+03:00", end: "18:00+03:00", dayNumber: 3),
+                WeekDayWorkTime(start: "12:00+03:00", end: "13:00+03:00", dayNumber: 4),
+                WeekDayWorkTime(start: "09:00+03:00", end: "00:00+03:00", dayNumber: 5)
+//                WeekDayWorkTime(start: "09:00+03:00", end: "05:00+03:00", dayNumber: 6),
+            ],
+            current: Date(),
+            countDays: 22,
+            step: DateComponents(minute: 15),
+            deliveryTime: DateComponents(minute: 15)
+        )
         super.init()
         
         days = viewModel.createData()

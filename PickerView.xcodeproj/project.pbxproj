@@ -19,7 +19,25 @@
 		AD82656222FFFE11005B65D3 /* WeekDayWorkTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD82656122FFFE11005B65D3 /* WeekDayWorkTime.swift */; };
 		AD82656423000180005B65D3 /* DatePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD82656323000180005B65D3 /* DatePickerViewModel.swift */; };
 		AD99723C2174B36E007D8D84 /* DatePickerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD99723B2174B36E007D8D84 /* DatePickerDataSource.swift */; };
+		ADD5750823CC6DE900CF2199 /* PickerViewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADD5750723CC6DE900CF2199 /* PickerViewTests.swift */; };
+		ADD5750F23CC6EEB00CF2199 /* DatePickerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD82656323000180005B65D3 /* DatePickerViewModel.swift */; };
+		ADD5751023CC6F2700CF2199 /* WeekDayWorkTime.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD82656122FFFE11005B65D3 /* WeekDayWorkTime.swift */; };
+		ADD5751123CC6F2A00CF2199 /* Minute.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD597AEC22FD6EF100AA0B9D /* Minute.swift */; };
+		ADD5751223CC6F2D00CF2199 /* Hour.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD597AED22FD6EF100AA0B9D /* Hour.swift */; };
+		ADD5751323CC6F3000CF2199 /* Day.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD597AEE22FD6EF100AA0B9D /* Day.swift */; };
+		ADD5751423CC6F3300CF2199 /* DateConstant.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD597AEB22FD6EF000AA0B9D /* DateConstant.swift */; };
+		ADD5751523CC6F3700CF2199 /* DatePickerDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD99723B2174B36E007D8D84 /* DatePickerDataSource.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		ADD5750A23CC6DE900CF2199 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = AD0936BA21522C2C00227B52 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = AD0936C121522C2C00227B52;
+			remoteInfo = PickerView;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		AD0936C221522C2C00227B52 /* PickerView.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PickerView.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -36,10 +54,20 @@
 		AD82656122FFFE11005B65D3 /* WeekDayWorkTime.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = WeekDayWorkTime.swift; path = PickerView/DatePicker/WeekDayWorkTime.swift; sourceTree = SOURCE_ROOT; };
 		AD82656323000180005B65D3 /* DatePickerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerViewModel.swift; sourceTree = "<group>"; };
 		AD99723B2174B36E007D8D84 /* DatePickerDataSource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DatePickerDataSource.swift; sourceTree = "<group>"; };
+		ADD5750523CC6DE900CF2199 /* PickerViewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PickerViewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		ADD5750723CC6DE900CF2199 /* PickerViewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PickerViewTests.swift; sourceTree = "<group>"; };
+		ADD5750923CC6DE900CF2199 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
 		AD0936BF21522C2C00227B52 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADD5750223CC6DE900CF2199 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -53,6 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				AD0936C421522C2C00227B52 /* PickerView */,
+				ADD5750623CC6DE900CF2199 /* PickerViewTests */,
 				AD0936C321522C2C00227B52 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -61,6 +90,7 @@
 			isa = PBXGroup;
 			children = (
 				AD0936C221522C2C00227B52 /* PickerView.app */,
+				ADD5750523CC6DE900CF2199 /* PickerViewTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -93,6 +123,15 @@
 			path = DatePicker;
 			sourceTree = "<group>";
 		};
+		ADD5750623CC6DE900CF2199 /* PickerViewTests */ = {
+			isa = PBXGroup;
+			children = (
+				ADD5750723CC6DE900CF2199 /* PickerViewTests.swift */,
+				ADD5750923CC6DE900CF2199 /* Info.plist */,
+			);
+			path = PickerViewTests;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -113,19 +152,41 @@
 			productReference = AD0936C221522C2C00227B52 /* PickerView.app */;
 			productType = "com.apple.product-type.application";
 		};
+		ADD5750423CC6DE900CF2199 /* PickerViewTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ADD5750C23CC6DE900CF2199 /* Build configuration list for PBXNativeTarget "PickerViewTests" */;
+			buildPhases = (
+				ADD5750123CC6DE900CF2199 /* Sources */,
+				ADD5750223CC6DE900CF2199 /* Frameworks */,
+				ADD5750323CC6DE900CF2199 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				ADD5750B23CC6DE900CF2199 /* PBXTargetDependency */,
+			);
+			name = PickerViewTests;
+			productName = PickerViewTests;
+			productReference = ADD5750523CC6DE900CF2199 /* PickerViewTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
 		AD0936BA21522C2C00227B52 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 1000;
+				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1000;
 				ORGANIZATIONNAME = a.ostroverkhov;
 				TargetAttributes = {
 					AD0936C121522C2C00227B52 = {
 						CreatedOnToolsVersion = 10.0;
 						LastSwiftMigration = 1020;
+					};
+					ADD5750423CC6DE900CF2199 = {
+						CreatedOnToolsVersion = 11.3;
+						TestTargetID = AD0936C121522C2C00227B52;
 					};
 				};
 			};
@@ -143,6 +204,7 @@
 			projectRoot = "";
 			targets = (
 				AD0936C121522C2C00227B52 /* PickerView */,
+				ADD5750423CC6DE900CF2199 /* PickerViewTests */,
 			);
 		};
 /* End PBXProject section */
@@ -155,6 +217,13 @@
 				AD0936D021522C2E00227B52 /* LaunchScreen.storyboard in Resources */,
 				AD0936CD21522C2E00227B52 /* Assets.xcassets in Resources */,
 				AD0936CB21522C2C00227B52 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		ADD5750323CC6DE900CF2199 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -177,7 +246,30 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		ADD5750123CC6DE900CF2199 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ADD5750F23CC6EEB00CF2199 /* DatePickerViewModel.swift in Sources */,
+				ADD5751223CC6F2D00CF2199 /* Hour.swift in Sources */,
+				ADD5751323CC6F3000CF2199 /* Day.swift in Sources */,
+				ADD5751123CC6F2A00CF2199 /* Minute.swift in Sources */,
+				ADD5751523CC6F3700CF2199 /* DatePickerDataSource.swift in Sources */,
+				ADD5751023CC6F2700CF2199 /* WeekDayWorkTime.swift in Sources */,
+				ADD5751423CC6F3300CF2199 /* DateConstant.swift in Sources */,
+				ADD5750823CC6DE900CF2199 /* PickerViewTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		ADD5750B23CC6DE900CF2199 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = AD0936C121522C2C00227B52 /* PickerView */;
+			targetProxy = ADD5750A23CC6DE900CF2199 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
 		AD0936C921522C2C00227B52 /* Main.storyboard */ = {
@@ -319,7 +411,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 5HT442372Z;
 				INFOPLIST_FILE = PickerView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -327,6 +420,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.PickerView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "wild-dev-Zart";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -336,7 +430,8 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_STYLE = Automatic;
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 5HT442372Z;
 				INFOPLIST_FILE = PickerView/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -344,8 +439,59 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = com.example.PickerView;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "wild-dev-Zart";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		ADD5750D23CC6DE900CF2199 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 83HFN4XWK9;
+				INFOPLIST_FILE = PickerViewTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ru.test.pickerview.PickerViewTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PickerView.app/PickerView";
+			};
+			name = Debug;
+		};
+		ADD5750E23CC6DE900CF2199 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 83HFN4XWK9;
+				INFOPLIST_FILE = PickerViewTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = ru.test.pickerview.PickerViewTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
+				"PROVISIONING_PROFILE_SPECIFIER[sdk=macosx*]" = "";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/PickerView.app/PickerView";
 			};
 			name = Release;
 		};
@@ -366,6 +512,15 @@
 			buildConfigurations = (
 				AD0936D521522C2E00227B52 /* Debug */,
 				AD0936D621522C2E00227B52 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ADD5750C23CC6DE900CF2199 /* Build configuration list for PBXNativeTarget "PickerViewTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ADD5750D23CC6DE900CF2199 /* Debug */,
+				ADD5750E23CC6DE900CF2199 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

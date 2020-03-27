@@ -11,10 +11,10 @@ import UIKit
 class ViewController: UIViewController {
     
     @IBOutlet weak var pickerView: UIPickerView!
-    var data = DatePickerDataSource()
+//    var data = DatePickerDataSource()
     override func viewDidLoad() {
         super.viewDidLoad()
-        pickerView.dataSource = data
-        pickerView.delegate = data
+//        pickerView.dataSource = data
+//        pickerView.delegate = data
     }
 }

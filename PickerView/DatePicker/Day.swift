@@ -24,6 +24,8 @@ import Foundation
     override var description: String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "dd:MM:yyyy'T'HH:mmZZZZ"
-        return dateFormatter.string(from: date)
+        let dateString = dateFormatter.string(from: date)
+        let intervasString = "\(intervals)"
+        return "date: \(dateString)\nintervals\(intervasString)\n"
     }
 }

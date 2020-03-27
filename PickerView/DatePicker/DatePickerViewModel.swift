@@ -17,16 +17,16 @@ import Foundation
     var deliveryTime: DateComponents
     
     //MARK: - private properties
-    private var nearestDeliveryDate: Date = Date()
+    private var nearestDeliveryDate: Date!
     private var dateConstant = DateConstant()
     
     //MARK: - init
     init(
         week: [WeekDayWorkTime],
-        current: Date = Date(),
-        countDays: Int = 22,
-        step: DateComponents = DateComponents(minute: 15),
-        deliveryTime: DateComponents = DateComponents(hour: 0, minute: 0)
+        current: Date,
+        countDays: Int,
+        step: DateComponents,
+        deliveryTime: DateComponents
         ) {
         
         self.countDays = countDays
@@ -42,7 +42,8 @@ import Foundation
             }
             return WeekDayWorkTime(
                 start: firstStep(tempStart),
-                end: firstStep(tempEnd)
+                end: tempEnd,
+                dayNumber: $0.dayNumber
             )
         }
         guard
@@ -55,8 +56,9 @@ import Foundation
     }
     
     
+    //MARK: - public methods
     func createData() -> [Day] {
-        var days = getDays()
+        let days = getDays()
         
         for i in 0..<days.count {
             days[i].hours = getHours(for: days[i])
@@ -74,23 +76,33 @@ import Foundation
         
         var result = [[DateInterval]]()
         
-//        var date = Date()
-
-        let weekNumber = dateConstant.weekDay(nearestDeliveryDate)
-        let first = week[weekNumber]
+        let first = getWeekDay(&nearestDeliveryDate)
         let intervals = workTime(for: nearestDeliveryDate, with: nearestDeliveryDate, start: first.start, end: first.end)
         result.append(intervals)
-        
-        var date = nearestDeliveryDate
+
+        var date = startOfNext(day: nearestDeliveryDate)
         for _ in 1..<countDays {
-            date = startOfNext(day: date)
-            let index = dateConstant.weekDay(date)
-            let weekDay = week[index]
+            let weekDay = getWeekDay(&date)
             let intervals = workTime(for: date, start: weekDay.start, end: weekDay.end)
             result.append(intervals)
+            date = startOfNext(day: date)
         }
         
         return result
+    }
+    
+    func getWeekDay(_ date: inout Date) -> WeekDayWorkTime {
+
+        var index = dateConstant.weekDay(date)
+
+        while week.first(where: { index == $0.dayNumber }) == nil {
+            date = startOfNext(day: date)
+            index = dateConstant.weekDay(date)
+        }
+
+//        print(index)
+//        print(date)
+        return week.first(where: { index == $0.dayNumber })!
     }
   
     //Время работы в конкретный день
@@ -160,9 +172,9 @@ import Foundation
             }
         }
         while resultIntervals.isEmpty {
-            let nextday = startOfNext(day: date)
-            let nextDayNumber = dateConstant.weekDay(nextday)
-            let day = week[nextDayNumber]
+            
+            var nextday = startOfNext(day: date)
+            let day = getWeekDay(&nextday)
             resultIntervals = workTime(for: nextday, start: day.start, end: day.end)
         }
         return resultIntervals
@@ -175,19 +187,21 @@ import Foundation
     func getDays() -> [Day] {
         var result = [Day]()
         let intervals = getDayModels()
-//        let nearestDeliveryDate = Date()
-//        let firstInterval = workTime(for: nearestDeliveryDate, with: nearestDeliveryDate, start: Date(), end: Date())
+        print("intervals", intervals)
         guard
             let firstInterval = intervals.first,
             let firstDay = firstInterval.first?.start else {
             fatalError()
         }
         var day = firstDay
+        print("day", day)
         self.nearestDeliveryDate = day
         result.append(Day(date: firstDay, intervals: firstInterval))
         
         for i in 1..<countDays {
-            day = startOfNext(day: day)
+            
+            day = intervals[i].first!.start
+            print("day", day)
             result.append(Day(date: day, intervals: intervals[i]))
         }
         return result
